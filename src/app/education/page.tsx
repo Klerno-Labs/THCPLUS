@@ -361,7 +361,7 @@ export default function EducationPage() {
               <CardContent>
                 <p className="text-gray-600 mb-4">
                   The golden rule for hemp-derived cannabinoids is to start with a low dose and gradually increase
-                  until you find your optimal dosage. Everyone's tolerance and body chemistry is different.
+                  until you find your optimal dosage. Everyone&apos;s tolerance and body chemistry is different.
                 </p>
                 <div className="space-y-4">
                   <div className="bg-primary/5 rounded-lg p-4">
@@ -531,7 +531,7 @@ export default function EducationPage() {
                       Clear Your Schedule
                     </h3>
                     <p className="text-gray-600 ml-8">
-                      Don't have any obligations or responsibilities for several hours after consuming.
+                      Don&apos;t have any obligations or responsibilities for several hours after consuming.
                       Give yourself time to fully experience the effects without stress.
                     </p>
                   </div>
@@ -553,7 +553,7 @@ export default function EducationPage() {
                       Be Patient with Edibles
                     </h3>
                     <p className="text-gray-600 ml-8">
-                      If trying edibles, resist the urge to take more if you don't feel effects immediately.
+                      If trying edibles, resist the urge to take more if you don&apos;t feel effects immediately.
                       It can take up to 2 hours for edibles to kick in. Wait at least 2 hours before considering
                       an additional dose.
                     </p>
@@ -562,10 +562,10 @@ export default function EducationPage() {
                   <div>
                     <h3 className="text-xl font-semibold text-primary mb-3 flex items-center">
                       <Info className="h-6 w-6 mr-2" />
-                      Know How to "Come Down"
+                      Know How to &ldquo;Come Down&rdquo;
                     </h3>
                     <p className="text-gray-600 ml-8">
-                      If effects feel too strong, remember: it's temporary and you'll be fine. Try deep breathing,
+                      If effects feel too strong, remember: it&apos;s temporary and you&apos;ll be fine. Try deep breathing,
                       eating something, drinking water, or taking a nap. Black pepper and CBD can also help reduce
                       intensity. The effects will pass with time.
                     </p>

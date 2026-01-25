@@ -1,4 +1,4 @@
-import { createHash } from 'crypto'
+import { createHash, randomBytes } from 'crypto'
 
 /**
  * Cryptographic utilities for privacy and security
@@ -33,6 +33,5 @@ export function generateSessionId(): string {
   }
 
   // Fallback for Node.js environment
-  const { randomBytes } = require('crypto')
   return randomBytes(16).toString('hex')
 }

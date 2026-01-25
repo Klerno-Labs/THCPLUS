@@ -22,7 +22,7 @@ export default async function AdminSubmissionsPage({
   const pageSize = 20
 
   // Build where clause for filtering
-  const where: any = {}
+  const where: Record<string, unknown> = {}
   if (status !== 'all') {
     where.status = status
   }

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Mail, Search, Download, Eye, Trash2, Check } from 'lucide-react'
+import { Mail, Search, Download, Eye, Check } from 'lucide-react'
 import { Button } from '@/app/components/ui/button'
 import { Input } from '@/app/components/ui/input'
 import { toast } from 'sonner'
@@ -57,7 +57,7 @@ export function SubmissionsTable({
 
       toast.success('Status updated successfully')
       router.refresh()
-    } catch (error) {
+    } catch {
       toast.error('Failed to update status')
     }
   }

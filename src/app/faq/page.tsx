@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronDown, Star } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { Card, CardContent } from '../components/ui/card'
 
 const faqs = [

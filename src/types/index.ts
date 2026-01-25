@@ -175,9 +175,7 @@ export interface DashboardStats {
   todayAgeVerifications: number
 }
 
-export interface SubmissionsTableData extends ContactSubmission {
-  // Extended with any additional display fields
-}
+export type SubmissionsTableData = ContactSubmission
 
 /**
  * Pagination

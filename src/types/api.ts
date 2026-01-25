@@ -9,7 +9,7 @@ import { NextRequest } from 'next/server'
 /**
  * API Route Handler Type
  */
-export type RouteHandler<T = unknown> = (
+export type RouteHandler = (
   request: NextRequest,
   context?: { params: Record<string, string> }
 ) => Promise<Response>

@@ -152,7 +152,7 @@ describe('Accessibility', () => {
   })
 
   it('effects should be decorative only and not affect semantics', () => {
-    const { container } = render(
+    render(
       <HoverSmoke>
         <button aria-label="Submit form">Submit</button>
       </HoverSmoke>
