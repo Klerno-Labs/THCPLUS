@@ -1,0 +1,171 @@
+'use client'
+
+import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Twitter } from 'lucide-react'
+
+export function Footer() {
+  return (
+    <footer className="bg-primary text-white">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="relative w-12 h-12">
+                <Image
+                  src="/images/cross2.png"
+                  alt="THC Plus Logo"
+                  width={48}
+                  height={48}
+                  className="object-contain"
+                  style={{ filter: 'brightness(0) invert(1)' }}
+                />
+              </div>
+              <span className="font-bold text-xl">THC Plus</span>
+            </div>
+            <p className="text-gray-300 text-sm">
+              Your trusted source for premium hemp products in Houston, TX. Quality, education, and customer service are our priorities.
+            </p>
+          </motion.div>
+
+          {/* Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-secondary font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="#about" className="text-gray-300 hover:text-secondary transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/education" className="text-gray-300 hover:text-secondary transition-colors">
+                  Education
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="text-gray-300 hover:text-secondary transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="#testimonials" className="text-gray-300 hover:text-secondary transition-colors">
+                  Testimonials
+                </Link>
+              </li>
+              <li>
+                <Link href="/visit-us" className="text-gray-300 hover:text-secondary transition-colors">
+                  Visit Us
+                </Link>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-secondary font-semibold mb-4">Contact Us</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start space-x-2">
+                <MapPin className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <span className="text-gray-300 text-sm">
+                  8302 N Eldridge Pkwy<br />
+                  Houston, TX 77041
+                </span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <Phone className="h-5 w-5 text-secondary" aria-hidden="true" />
+                <span className="text-gray-300 text-sm">(346) 206-3949</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <Mail className="h-5 w-5 text-secondary" aria-hidden="true" />
+                <span className="text-gray-300 text-sm">info@thcplus.com</span>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Hours */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-secondary font-semibold mb-4">Hours</h3>
+            <ul className="space-y-2">
+              <li className="flex items-center space-x-2">
+                <Clock className="h-5 w-5 text-secondary" aria-hidden="true" />
+                <div className="text-gray-300 text-sm">
+                  <p>Monday - Sunday</p>
+                  <p>Open Daily Until 11:00 PM</p>
+                </div>
+              </li>
+            </ul>
+            {/* TODO: Update social media links with actual URLs */}
+            <div className="flex space-x-4 mt-4">
+              <a
+                href="https://www.instagram.com/3rdcoastsmokecompany/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-secondary transition-colors"
+                aria-label="Follow us on Instagram"
+              >
+                <Instagram className="h-6 w-6" aria-hidden="true" />
+              </a>
+              <a
+                href="https://www.facebook.com/3rdcoastsmokecompany/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-secondary transition-colors"
+                aria-label="Follow us on Facebook"
+              >
+                <Facebook className="h-6 w-6" aria-hidden="true" />
+              </a>
+              <a
+                href="https://twitter.com/3rdcoastsmoke"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-secondary transition-colors"
+                aria-label="Follow us on Twitter"
+              >
+                <Twitter className="h-6 w-6" aria-hidden="true" />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p className="text-gray-400 text-sm">
+            &copy; {new Date().getFullYear()} THC Plus Smoke Company. All Rights Reserved.
+          </p>
+          <p className="text-gray-500 text-xs mt-4 max-w-4xl mx-auto leading-relaxed">
+            Must be 21 or over to purchase these products or visit locations. This product contains industrial
+            (Lab Tested) hemp (Hemp Flower) that was grown pursuant to state and federal law (Containing not
+            more than 0.3% delta-9 THC on a dry weight basis) by licensed farmers in accordance with the
+            industrial Hemp provisions of the Agricultural Act of 2014 (known as the &quot;Farm Act&quot;) and its
+            state law counterparts thus it is not subject to regulation, or control, under the Federal
+            Controlled Substances Act. The FDA has not evaluated this product and these statements for
+            safety or efficacy. As with any new product, consult your physician before consuming this
+            product. Do not consume if pregnant or breastfeeding. This hemp-derived product may contain
+            trace amounts of Delta-9 THC in accordance with the 2018 Farm Bill.
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}

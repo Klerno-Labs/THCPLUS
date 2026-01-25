@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run tests before pushing to remote
+echo "Running tests before push..."
+npm run test
+
+# Run type checking
+echo "Running type check..."
+npx tsc --noEmit
+
+echo "Pre-push checks passed! ✅"

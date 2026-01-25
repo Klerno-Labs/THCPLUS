@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+/// Age verification log for legal compliance
+/// Stores all verification attempts with IP and timestamp for audit trail
+model AgeVerification {
+  id         String   @id @default(cuid())
+  sessionId  String   @unique
+  ipAddress  String   // Hashed for privacy
+  userAgent  String
+  verifiedAt DateTime @default(now())
+  expiresAt  DateTime // 24-hour expiry
+  createdAt  DateTime @default(now())
+
+  @@index([sessionId])
+  @@index([ipAddress])
+  @@index([verifiedAt])
+  @@map("age_verifications")
+}
+
+/// Contact form submissions
+/// Stores all contact inquiries from website visitors
+model ContactSubmission {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  message     String   @db.Text
+  ipAddress   String
+  userAgent   String
+  submittedAt DateTime @default(now())
+  status      String   @default("new") // new, read, replied
+  notes       String?  @db.Text // Admin notes
+  repliedAt   DateTime?
+  repliedBy   String?
+
+  @@index([status])
+  @@index([submittedAt])
+  @@index([email])
+  @@map("contact_submissions")
+}
+
+/// Admin users for dashboard access
+/// Credential-based authentication with bcrypt password hashing
+model Admin {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         String    @default("admin") // admin, super_admin
+  createdAt    DateTime  @default(now())
+  lastLoginAt  DateTime?
+  isActive     Boolean   @default(true)
+
+  @@index([email])
+  @@map("admins")
+}
