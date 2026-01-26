@@ -9,6 +9,7 @@ describe('contactFormSchema', () => {
         name: 'John Doe',
         email: 'john@example.com',
         message: 'This is a valid message with sufficient length.',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(validData)
@@ -20,6 +21,7 @@ describe('contactFormSchema', () => {
         name: '  John Doe  ',
         email: '  john@example.com  ',
         message: '  Valid message with spaces  ',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.parse(data)
@@ -33,6 +35,7 @@ describe('contactFormSchema', () => {
         name: 'John Doe',
         email: 'JOHN@EXAMPLE.COM',
         message: 'Valid message here',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.parse(data)
@@ -44,6 +47,7 @@ describe('contactFormSchema', () => {
         name: 'Jo',
         email: 'jo@example.com',
         message: 'Valid message here',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -55,6 +59,7 @@ describe('contactFormSchema', () => {
         name: 'John Doe',
         email: 'john@example.com',
         message: 'Ten chars.',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -68,6 +73,7 @@ describe('contactFormSchema', () => {
         name: 'J',
         email: 'john@example.com',
         message: 'Valid message here',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -82,6 +88,7 @@ describe('contactFormSchema', () => {
         name: 'A'.repeat(101),
         email: 'john@example.com',
         message: 'Valid message here',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -96,6 +103,7 @@ describe('contactFormSchema', () => {
         name: 'John Doe',
         email: 'not-an-email',
         message: 'Valid message here',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -110,6 +118,7 @@ describe('contactFormSchema', () => {
         name: 'John Doe',
         email: 'johnexample.com',
         message: 'Valid message here',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -121,6 +130,7 @@ describe('contactFormSchema', () => {
         name: 'John Doe',
         email: 'john@example.com',
         message: 'Short',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -135,6 +145,7 @@ describe('contactFormSchema', () => {
         name: 'John Doe',
         email: 'john@example.com',
         message: 'A'.repeat(1001),
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -161,12 +172,13 @@ describe('contactFormSchema', () => {
         name: '',
         email: '',
         message: '',
+        captchaToken: '',
       }
 
       const result = contactFormSchema.safeParse(data)
       expect(result.success).toBe(false)
       if (!result.success) {
-        expect(result.error.issues.length).toBe(3)
+        expect(result.error.issues.length).toBe(4)
       }
     })
   })
@@ -177,6 +189,7 @@ describe('contactFormSchema', () => {
         name: "O'Brien-Smith Jr.",
         email: 'obrien@example.com',
         message: 'Valid message here',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -188,6 +201,7 @@ describe('contactFormSchema', () => {
         name: 'José García',
         email: 'jose.garcia@example.com',
         message: 'Valid message here',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
@@ -199,6 +213,7 @@ describe('contactFormSchema', () => {
         name: 'John Doe',
         email: 'john@example.com',
         message: 'Line 1\nLine 2\nLine 3 with enough characters',
+        captchaToken: 'mock-captcha-token',
       }
 
       const result = contactFormSchema.safeParse(data)
