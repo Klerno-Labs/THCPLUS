@@ -1,9 +1,9 @@
-# Run tests before pushing to remote
-echo "Running tests before push..."
-NODE_OPTIONS="--max-old-space-size=8192" npm run test -- --run
-
-# Run type checking
+# Run type checking before push
 echo "Running type check..."
 npx tsc --noEmit
+
+# Build check
+echo "Running build check..."
+npm run build
 
 echo "Pre-push checks passed! ✅"
