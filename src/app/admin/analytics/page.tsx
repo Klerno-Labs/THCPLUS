@@ -2,6 +2,9 @@ import { prisma } from '@/lib/db'
 import { Card } from '@/app/components/ui/card'
 import { TrendingUp, Users, Calendar, BarChart3 } from 'lucide-react'
 
+// Force dynamic rendering (requires database at runtime)
+export const dynamic = 'force-dynamic'
+
 /**
  * Admin Analytics Page
  *
@@ -65,14 +68,10 @@ export default async function AdminAnalyticsPage() {
     })
 
   const avgResponseTime =
-    responseTimes.length > 0
-      ? responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length
-      : 0
+    responseTimes.length > 0 ? responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length : 0
 
   // Get submissions by day for the last 30 days
-  const submissionsByDay = await prisma.$queryRaw<
-    { date: Date; count: number }[]
-  >`
+  const submissionsByDay = await prisma.$queryRaw<{ date: Date; count: number }[]>`
     SELECT
       DATE(submitted_at) as date,
       COUNT(*)::int as count
@@ -122,7 +121,9 @@ export default async function AdminAnalyticsPage() {
       {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Analytics</h1>
-        <p className="text-gray-600 mt-1">Track submissions, response times, and visitor engagement.</p>
+        <p className="text-gray-600 mt-1">
+          Track submissions, response times, and visitor engagement.
+        </p>
       </div>
 
       {/* Stats Grid */}
@@ -164,7 +165,9 @@ export default async function AdminAnalyticsPage() {
                 <div className="flex-1 flex items-center gap-2">
                   <div
                     className="h-8 bg-primary-500 rounded"
-                    style={{ width: `${(day.count / Math.max(...submissionsByDay.map((d) => d.count))) * 100}%` }}
+                    style={{
+                      width: `${(day.count / Math.max(...submissionsByDay.map((d) => d.count))) * 100}%`,
+                    }}
                   />
                   <span className="text-sm font-medium text-gray-900">{day.count}</span>
                 </div>

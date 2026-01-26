@@ -3,6 +3,9 @@ import { Card } from '@/app/components/ui/card'
 import { Mail, CheckCircle, Clock, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 
+// Force dynamic rendering (requires database at runtime)
+export const dynamic = 'force-dynamic'
+
 /**
  * Admin Dashboard Home Page
  *
@@ -14,8 +17,8 @@ import Link from 'next/link'
  */
 export default async function AdminDashboardPage() {
   // Fetch statistics
-  const [totalSubmissions, todaySubmissions, newSubmissions, recentSubmissions] =
-    await Promise.all([
+  const [totalSubmissions, todaySubmissions, newSubmissions, recentSubmissions] = await Promise.all(
+    [
       prisma.contactSubmission.count(),
       prisma.contactSubmission.count({
         where: {
@@ -31,7 +34,8 @@ export default async function AdminDashboardPage() {
         take: 10,
         orderBy: { submittedAt: 'desc' },
       }),
-    ])
+    ]
+  )
 
   const stats = [
     {
@@ -114,18 +118,12 @@ export default async function AdminDashboardPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-gray-200">
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
-                    Name
-                  </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
-                    Email
-                  </th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Name</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Email</th>
                   <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
                     Message
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
-                    Date
-                  </th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Date</th>
                   <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
                     Status
                   </th>

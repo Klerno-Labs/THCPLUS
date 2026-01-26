@@ -2,6 +2,9 @@ import { prisma } from '@/lib/db'
 import { Card } from '@/app/components/ui/card'
 import { SubmissionsTable } from '@/app/components/admin/submissions-table'
 
+// Force dynamic rendering (requires database at runtime)
+export const dynamic = 'force-dynamic'
+
 /**
  * Admin Submissions Management Page
  *

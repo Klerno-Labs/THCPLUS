@@ -3,6 +3,9 @@ import { Card } from '@/app/components/ui/card'
 import { Shield, Download, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
 
+// Force dynamic rendering (requires database at runtime)
+export const dynamic = 'force-dynamic'
+
 /**
  * Admin Compliance Page
  *
