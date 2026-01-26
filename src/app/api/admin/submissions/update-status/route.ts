@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { requireAuth } from '@/lib/auth'
 
+// Force dynamic rendering for this route (uses headers/cookies)
+export const dynamic = 'force-dynamic'
+
 /**
  * API Route: Update Submission Status
  *
