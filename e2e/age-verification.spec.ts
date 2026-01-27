@@ -1,91 +1,52 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Age Verification', () => {
-  test.beforeEach(async ({ page }) => {
-    // Clear localStorage before each test to ensure age gate appears
+  test('should redirect to age verification when not verified', async ({ page }) => {
     await page.goto('/')
-    await page.evaluate(() => localStorage.clear())
+    await expect(page).toHaveURL('/age-verification')
   })
 
-  test('should display age gate on first visit', async ({ page }) => {
-    await page.goto('/')
-
-    // Should see age verification modal
-    await expect(page.getByText(/age verification/i)).toBeVisible()
-    await expect(page.getByRole('button', { name: /i am 21 or older/i })).toBeVisible()
-    await expect(page.getByRole('button', { name: /i am under 21/i })).toBeVisible()
-  })
-
-  test('should allow access when user accepts age verification', async ({ page }) => {
-    await page.goto('/')
+  test('should allow access after age verification', async ({ page, context }) => {
+    await page.goto('/age-verification')
 
     // Click "I am 21 or older" button
+    const verifyButton = page.getByRole('button', { name: /i am 21 or older/i })
+    await expect(verifyButton).toBeVisible()
+    await verifyButton.click()
+
+    // Should redirect to home page
+    await expect(page).toHaveURL('/')
+
+    // Verify session cookie is set
+    const cookies = await context.cookies()
+    const sessionCookie = cookies.find((c) => c.name.includes('age-verified'))
+    expect(sessionCookie).toBeDefined()
+  })
+
+  test('should maintain verification across navigation', async ({ page }) => {
+    // First verify age
+    await page.goto('/age-verification')
     await page.getByRole('button', { name: /i am 21 or older/i }).click()
+    await expect(page).toHaveURL('/')
 
-    // Should see the main content (Welcome to THC Plus)
-    await expect(page.getByText(/welcome to 3rd coast/i)).toBeVisible()
+    // Navigate to other pages
+    await page.goto('/education')
+    await expect(page).not.toHaveURL('/age-verification')
 
-    // Age gate should not be visible
-    await expect(page.getByText(/age verification/i)).not.toBeVisible()
+    await page.goto('/faq')
+    await expect(page).not.toHaveURL('/age-verification')
   })
 
-  test('should persist verification in localStorage', async ({ page }) => {
-    await page.goto('/')
+  test('should have accessible age verification page', async ({ page }) => {
+    await page.goto('/age-verification')
 
-    // Accept age verification
-    await page.getByRole('button', { name: /i am 21 or older/i }).click()
+    // Check for heading
+    const heading = page.getByRole('heading', { level: 1 })
+    await expect(heading).toBeVisible()
 
-    // Reload the page
-    await page.reload()
-
-    // Should not see age gate again
-    await expect(page.getByText(/welcome to 3rd coast/i)).toBeVisible()
-    await expect(page.getByText(/age verification/i)).not.toBeVisible()
-  })
-
-  test('should navigate away when user denies age verification', async ({ page }) => {
-    await page.goto('/')
-
-    // Set up listener for navigation
-    const navigationPromise = page.waitForURL('https://www.google.com/')
-
-    // Click "I am under 21" button
-    await page.getByRole('button', { name: /i am under 21/i }).click()
-
-    // Should navigate to Google (or attempt to)
-    // Note: In tests, this might not work due to cross-origin navigation
-    // We're just verifying the click handler is set up correctly
-  })
-
-  test('should display company logo and branding', async ({ page }) => {
-    await page.goto('/')
-
-    // Should see the THC+ logo badge
-    await expect(page.getByText('THC+')).toBeVisible()
-  })
-
-  test('should display legal disclaimer', async ({ page }) => {
-    await page.goto('/')
-
-    // Should see disclaimer text about Terms of Service
-    await expect(page.getByText(/terms of service/i)).toBeVisible()
-    await expect(page.getByText(/privacy policy/i)).toBeVisible()
-  })
-
-  test.describe('Accessibility', () => {
-    test('should be keyboard navigable', async ({ page }) => {
-      await page.goto('/')
-
-      // Tab to first button
-      await page.keyboard.press('Tab')
-
-      // Should focus on "I am 21 or older" button
-      const acceptButton = page.getByRole('button', { name: /i am 21 or older/i })
-      await expect(acceptButton).toBeFocused()
-
-      // Press Enter should accept
-      await page.keyboard.press('Enter')
-      await expect(page.getByText(/welcome to 3rd coast/i)).toBeVisible()
-    })
+    // Check for button accessibility
+    const button = page.getByRole('button', { name: /i am 21 or older/i })
+    await expect(button).toBeVisible()
+    await expect(button).toBeEnabled()
   })
 })

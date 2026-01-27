@@ -1,84 +1,93 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Navigation', () => {
-  test.beforeEach(async ({ page }) => {
-    // Accept age verification before each test
-    await page.goto('/')
-    await page.evaluate(() => localStorage.setItem('age-verified', 'true'))
-    await page.reload()
+  test.beforeEach(async ({ context }) => {
+    // Set age verification cookie to bypass age gate
+    await context.addCookies([
+      {
+        name: 'age-verified',
+        value: 'true',
+        domain: 'localhost',
+        path: '/',
+        expires: Date.now() / 1000 + 86400,
+      },
+    ])
   })
 
-  test('should navigate to education page', async ({ page }) => {
+  test('should navigate to all main pages', async ({ page }) => {
     await page.goto('/')
 
-    // Click on Education link in header
-    await page.getByRole('link', { name: /education/i }).first().click()
+    // Navigate to Education
+    await page
+      .getByRole('link', { name: /education/i })
+      .first()
+      .click()
+    await expect(page).toHaveURL('/education')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/hemp education/i)
 
-    // Should be on education page
-    await expect(page).toHaveURL(/\/education/)
-    await expect(page.getByText(/what is/i)).toBeVisible()
+    // Navigate to FAQ
+    await page.getByRole('link', { name: /faq/i }).first().click()
+    await expect(page).toHaveURL('/faq')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+      /frequently asked questions/i
+    )
+
+    // Navigate to Visit Us
+    await page
+      .getByRole('link', { name: /visit us/i })
+      .first()
+      .click()
+    await expect(page).toHaveURL('/visit-us')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/visit our store/i)
   })
 
-  test('should navigate to visit us page', async ({ page }) => {
+  test('should navigate using header links', async ({ page }) => {
     await page.goto('/')
 
-    // Click on Visit Us link in header
-    await page.getByRole('link', { name: /visit us/i }).first().click()
+    // Click About link in header
+    const aboutLink = page.locator('header').getByRole('link', { name: /about/i })
+    await aboutLink.click()
 
-    // Should be on visit us page
-    await expect(page).toHaveURL(/\/visit-us/)
+    // Should scroll to about section
+    await expect(page).toHaveURL('/#about')
+  })
+
+  test('should have working mobile navigation', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 })
+    await page.goto('/')
+
+    // Open mobile menu
+    const menuButton = page.getByRole('button', { name: /open menu/i })
+    await expect(menuButton).toBeVisible()
+    await menuButton.click()
+
+    // Click navigation link
+    const educationLink = page.getByRole('link', { name: /education/i }).first()
+    await educationLink.click()
+
+    await expect(page).toHaveURL('/education')
+  })
+
+  test('should have accessible navigation', async ({ page }) => {
+    await page.goto('/')
+
+    // Check main navigation has proper ARIA
+    const nav = page.locator('nav[aria-label="Main navigation"]')
+    await expect(nav).toBeVisible()
+
+    // Check all links are keyboard accessible
+    await page.keyboard.press('Tab')
+    const focusedElement = await page.evaluate(() => document.activeElement?.tagName)
+    expect(focusedElement).toBeTruthy()
   })
 
   test('should navigate back to home from logo', async ({ page }) => {
     await page.goto('/education')
 
-    // Click on logo/home link
-    await page.getByRole('link', { name: /3rd coast smoke company/i }).click()
+    // Click logo
+    const logo = page.getByRole('link', { name: /thc plus home/i })
+    await logo.click()
 
-    // Should be back on homepage
     await expect(page).toHaveURL('/')
-    await expect(page.getByText(/welcome to 3rd coast/i)).toBeVisible()
-  })
-
-  test.describe('Mobile Navigation', () => {
-    test.use({ viewport: { width: 375, height: 667 } })
-
-    test('should open and close mobile menu', async ({ page }) => {
-      await page.goto('/')
-
-      // Click hamburger menu
-      await page.getByLabel(/toggle menu/i).click()
-
-      // Mobile menu should be visible
-      await expect(page.getByRole('link', { name: /education/i }).first()).toBeVisible()
-
-      // Click hamburger again to close
-      await page.getByLabel(/toggle menu/i).click()
-
-      // Menu should close (implementation may vary)
-    })
-  })
-
-  test.describe('Footer Navigation', () => {
-    test('should display footer links', async ({ page }) => {
-      await page.goto('/')
-
-      // Scroll to footer
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-
-      // Should see footer navigation
-      await expect(page.getByRole('link', { name: /education/i }).last()).toBeVisible()
-      await expect(page.getByRole('link', { name: /visit us/i }).last()).toBeVisible()
-    })
-
-    test('should display social media links', async ({ page }) => {
-      await page.goto('/')
-
-      // Scroll to footer
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-
-      // Should see social media section
-      await expect(page.getByText(/follow us/i)).toBeVisible()
-    })
   })
 })

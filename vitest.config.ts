@@ -5,26 +5,26 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: 'jsdom',
+    environment: 'happy-dom',
     globals: true,
     setupFiles: ['./test/setup.ts'],
-    exclude: ['**/node_modules/**', '**/dist/**', '**/e2e/**', '**/.next/**'],
+    exclude: ['**/node_modules/**', '**/e2e/**', '**/.next/**'],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html', 'lcov'],
+      reporter: ['text', 'json', 'html'],
       exclude: [
         'node_modules/',
         'test/',
-        '**/*.config.*',
+        'e2e/',
         '**/*.d.ts',
-        '**/index.ts',
+        '**/*.config.*',
+        '**/mockData',
         '**/.next/**',
-        '**/dist/**',
       ],
       thresholds: {
         lines: 85,
         functions: 85,
-        branches: 80,
+        branches: 85,
         statements: 85,
       },
     },
