@@ -39,10 +39,10 @@ export function SmokeParticles({
   count = 15,
   colors = [
     'rgba(147, 51, 234, 0.15)', // Purple
-    'rgba(34, 197, 94, 0.15)',  // Green
-    'rgba(255, 255, 255, 0.1)',  // White
-    'rgba(168, 85, 247, 0.12)',  // Light purple
-    'rgba(74, 222, 128, 0.12)',  // Light green
+    'rgba(34, 197, 94, 0.15)', // Green
+    'rgba(255, 255, 255, 0.1)', // White
+    'rgba(168, 85, 247, 0.12)', // Light purple
+    'rgba(74, 222, 128, 0.12)', // Light green
   ],
   variant = 'rising',
   speed = 'medium',
@@ -62,16 +62,20 @@ export function SmokeParticles({
 
   useEffect(() => {
     setIsMounted(true)
+
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
     setParticles(
-      Array.from({ length: count }, (_, i) => ({
+      Array.from({ length: prefersReducedMotion ? Math.min(count, 5) : count }, (_, i) => ({
         id: i,
         x: Math.random() * 100, // 0-100%
         y: variant === 'rising' ? 100 + Math.random() * 20 : Math.random() * 100,
-        size: 150 + Math.random() * 400, // 150-550px (varied sizes for realism)
-        duration: (10 + Math.random() * 15) * speedMultiplier, // 10-25s (VERY SLOW like real smoke)
-        delay: Math.random() * 5, // 0-5s stagger for more natural appearance
+        size: 150 + Math.random() * 300, // 150-450px (reduced max size)
+        duration: (10 + Math.random() * 15) * speedMultiplier, // 10-25s
+        delay: Math.random() * 5, // 0-5s stagger
         color: colors[Math.floor(Math.random() * colors.length)],
-        blur: 40 + Math.random() * 50, // 40-90px blur (realistic smoke diffusion)
+        blur: 20 + Math.random() * 30, // 20-50px blur (reduced for performance)
       }))
     )
   }, [count, colors, variant, speedMultiplier])
@@ -195,10 +199,12 @@ export function SmokeParticles({
             style={{
               width: particle.size,
               height: particle.size,
-              background: `radial-gradient(circle, ${particle.color} 0%, ${particle.color.replace(/[\d.]+\)/, '0.5)')} 40%, transparent 75%)`,
+              background: `radial-gradient(circle, ${particle.color} 0%, transparent 70%)`,
               filter: `blur(${particle.blur}px)`,
               mixBlendMode: 'screen',
               willChange: 'transform, opacity',
+              transform: 'translateZ(0)', // Force GPU acceleration
+              backfaceVisibility: 'hidden' as const, // Optimize rendering
             }}
             initial={variants.initial}
             animate={variants.animate}
@@ -206,7 +212,7 @@ export function SmokeParticles({
               duration: particle.duration,
               repeat: Infinity,
               delay: particle.delay,
-              ease: 'easeOut',
+              ease: 'linear', // Linear is more performant than easeOut
             }}
           />
         )
@@ -226,21 +232,9 @@ export function LayeredSmoke({
   theme?: 'default' | 'green' | 'purple' | 'rainbow'
 }) {
   const themeColors = {
-    default: [
-      'rgba(147, 51, 234, 0.15)',
-      'rgba(34, 197, 94, 0.15)',
-      'rgba(255, 255, 255, 0.1)',
-    ],
-    green: [
-      'rgba(34, 197, 94, 0.2)',
-      'rgba(74, 222, 128, 0.15)',
-      'rgba(134, 239, 172, 0.1)',
-    ],
-    purple: [
-      'rgba(147, 51, 234, 0.2)',
-      'rgba(168, 85, 247, 0.15)',
-      'rgba(192, 132, 252, 0.1)',
-    ],
+    default: ['rgba(147, 51, 234, 0.15)', 'rgba(34, 197, 94, 0.15)', 'rgba(255, 255, 255, 0.1)'],
+    green: ['rgba(34, 197, 94, 0.2)', 'rgba(74, 222, 128, 0.15)', 'rgba(134, 239, 172, 0.1)'],
+    purple: ['rgba(147, 51, 234, 0.2)', 'rgba(168, 85, 247, 0.15)', 'rgba(192, 132, 252, 0.1)'],
     rainbow: [
       'rgba(147, 51, 234, 0.15)',
       'rgba(34, 197, 94, 0.15)',
@@ -252,27 +246,27 @@ export function LayeredSmoke({
 
   return (
     <div className={`absolute inset-0 ${className}`}>
-      {/* Background ambient layer */}
+      {/* Background ambient layer - reduced count for performance */}
       <SmokeParticles
-        count={8}
+        count={4}
         variant="ambient"
         speed="slow"
         opacity={0.3}
         colors={themeColors[theme]}
       />
 
-      {/* Main rising smoke */}
+      {/* Main rising smoke - reduced count for performance */}
       <SmokeParticles
-        count={12}
+        count={6}
         variant="rising"
         speed="medium"
         opacity={0.6}
         colors={themeColors[theme]}
       />
 
-      {/* Swirling foreground */}
+      {/* Swirling foreground - reduced count for performance */}
       <SmokeParticles
-        count={6}
+        count={3}
         variant="swirling"
         speed="fast"
         opacity={0.4}

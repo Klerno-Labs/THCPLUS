@@ -25,8 +25,11 @@ import type { ApiResponse } from '@/types'
  */
 export async function verifyAge(accepted: boolean): Promise<ApiResponse<void>> {
   try {
+    console.log('[Age Verification] Starting verification process...')
+
     // 1. Validate input
     const validatedData = ageVerificationSchema.parse({ accepted })
+    console.log('[Age Verification] Input validated:', { accepted: validatedData.accepted })
 
     if (!validatedData.accepted) {
       // User denied - redirect to Google
@@ -34,13 +37,23 @@ export async function verifyAge(accepted: boolean): Promise<ApiResponse<void>> {
     }
 
     // 2. Get request metadata
+    console.log('[Age Verification] Getting request metadata...')
     const headersList = await headers()
-    const ipAddress = headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || 'unknown'
+    const ipAddress =
+      headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || 'unknown'
     const userAgent = headersList.get('user-agent') || 'unknown'
+    console.log('[Age Verification] Metadata retrieved:', {
+      ipAddress,
+      userAgent: userAgent.substring(0, 50),
+    })
 
     // 3. Rate limiting check (10 attempts per hour per IP)
+    console.log('[Age Verification] Checking rate limit...')
     const hashedIp = hashIpAddress(ipAddress)
     const rateLimitResult = await checkRateLimit(hashedIp, ageVerificationRateLimit)
+    console.log('[Age Verification] Rate limit check complete:', {
+      success: rateLimitResult.success,
+    })
 
     if (!rateLimitResult.success) {
       const resetTime = getTimeUntilReset(rateLimitResult.reset)

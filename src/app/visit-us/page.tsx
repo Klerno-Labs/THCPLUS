@@ -3,15 +3,7 @@
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '../components/ui/card'
 import { Button } from '../components/ui/button'
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  Navigation,
-  Car,
-  CheckCircle
-} from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Navigation, Car, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 
 const storeFeatures = [
@@ -43,8 +35,8 @@ export default function VisitUsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Experience the THC Plus difference in person. Our Houston location offers
-            a premium shopping experience with expert guidance.
+            Experience the THC Plus difference in person. Our Houston location offers a premium
+            shopping experience with expert guidance.
           </motion.p>
         </div>
       </section>
@@ -152,7 +144,10 @@ export default function VisitUsPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-primary text-lg">Email</h3>
-                      <a href="mailto:info@thcplus.com" className="text-gray-600 hover:text-secondary">
+                      <a
+                        href="mailto:info@thcplus.com"
+                        className="text-gray-600 hover:text-secondary"
+                      >
                         info@thcplus.com
                       </a>
                     </div>
@@ -176,7 +171,8 @@ export default function VisitUsPage() {
           >
             <h2 className="text-3xl font-bold text-primary mb-4">Getting Here</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              We&apos;re conveniently located in northwest Houston with easy access from major highways.
+              We&apos;re conveniently located in northwest Houston with easy access from major
+              highways.
             </p>
           </motion.div>
 
@@ -240,9 +236,9 @@ export default function VisitUsPage() {
             >
               <h2 className="text-3xl font-bold text-primary mb-6">What to Expect</h2>
               <p className="text-gray-600 mb-8">
-                When you visit THC Plus, you&apos;ll be greeted by our friendly
-                and knowledgeable staff in a clean, welcoming environment. We&apos;re here to
-                help you find the perfect products for your needs.
+                When you visit THC Plus, you&apos;ll be greeted by our friendly and knowledgeable
+                staff in a clean, welcoming environment. We&apos;re here to help you find the
+                perfect products for your needs.
               </p>
               <ul className="space-y-3">
                 {storeFeatures.map((feature, index) => (
@@ -306,10 +302,13 @@ export default function VisitUsPage() {
                   Get Directions
                 </a>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                <Link href="/#contact">
-                  Contact Us
-                </Link>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-white text-white bg-transparent hover:bg-white hover:text-primary"
+              >
+                <Link href="/#contact">Contact Us</Link>
               </Button>
             </div>
           </motion.div>
