@@ -48,26 +48,39 @@ export function Header() {
               style={{ filter: 'brightness(0) invert(1)' }}
             />
           </div>
-          <span className="font-bold text-xl text-white">
-            THC Plus
-          </span>
+          <span className="font-bold text-xl text-white">THC Plus</span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6" aria-label="Main navigation">
-          <Link href="#about" className="text-white hover:text-secondary transition-colors font-medium">
+          <Link
+            href="/#about"
+            className="text-white hover:text-secondary transition-colors font-medium"
+          >
             About
           </Link>
-          <Link href="/education" className="text-white hover:text-secondary transition-colors font-medium">
+          <Link
+            href="/education"
+            className="text-white hover:text-secondary transition-colors font-medium"
+          >
             Education
           </Link>
-          <Link href="/faq" className="text-white hover:text-secondary transition-colors font-medium">
+          <Link
+            href="/faq"
+            className="text-white hover:text-secondary transition-colors font-medium"
+          >
             FAQ
           </Link>
-          <Link href="#testimonials" className="text-white hover:text-secondary transition-colors font-medium">
+          <Link
+            href="/#testimonials"
+            className="text-white hover:text-secondary transition-colors font-medium"
+          >
             Testimonials
           </Link>
-          <Link href="/visit-us" className="text-white hover:text-secondary transition-colors font-medium">
+          <Link
+            href="/visit-us"
+            className="text-white hover:text-secondary transition-colors font-medium"
+          >
             Visit Us
           </Link>
         </nav>
@@ -82,11 +95,7 @@ export function Header() {
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
         >
-          {isOpen ? (
-            <X className="h-6 w-6 text-white" />
-          ) : (
-            <Menu className="h-6 w-6 text-white" />
-          )}
+          {isOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
         </Button>
       </div>
 
@@ -103,7 +112,7 @@ export function Header() {
         >
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <Link
-              href="#about"
+              href="/#about"
               className="text-white hover:text-secondary transition-colors"
               onClick={() => setIsOpen(false)}
             >
@@ -124,7 +133,7 @@ export function Header() {
               FAQ
             </Link>
             <Link
-              href="#testimonials"
+              href="/#testimonials"
               className="text-white hover:text-secondary transition-colors"
               onClick={() => setIsOpen(false)}
             >
