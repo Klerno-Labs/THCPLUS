@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Shield, Award, Users, Leaf } from 'lucide-react'
 import { Card, CardContent } from '../ui/card'
+import Image from 'next/image'
 
 const features = [
   {
@@ -78,15 +79,15 @@ export function AboutSection() {
           viewport={{ once: true }}
         >
           <div className="relative">
-            <div
-              className="rounded-lg overflow-hidden shadow-xl"
-              style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                height: '400px',
-              }}
-            />
+            <div className="relative rounded-lg overflow-hidden shadow-xl h-[400px]">
+              <Image
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="THC Plus store interior"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
             <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-secondary/20 rounded-lg -z-10" />
           </div>
           <div>

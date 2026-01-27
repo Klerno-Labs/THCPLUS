@@ -1,4 +1,9 @@
 import { withSentryConfig } from '@sentry/nextjs'
+import bundleAnalyzer from '@next/bundle-analyzer'
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -116,5 +121,5 @@ const sentryWebpackPluginOptions = {
   widenClientFileUpload: true,
 }
 
-// Wrap config with Sentry for automatic instrumentation
-export default withSentryConfig(nextConfig, sentryWebpackPluginOptions)
+// Wrap config with Sentry and Bundle Analyzer
+export default withBundleAnalyzer(withSentryConfig(nextConfig, sentryWebpackPluginOptions))
