@@ -72,12 +72,6 @@ export function Header() {
             FAQ
           </Link>
           <Link
-            href="/#testimonials"
-            className="text-white hover:text-secondary transition-colors font-medium"
-          >
-            Testimonials
-          </Link>
-          <Link
             href="/visit-us"
             className="text-white hover:text-secondary transition-colors font-medium"
           >
@@ -131,13 +125,6 @@ export function Header() {
               onClick={() => setIsOpen(false)}
             >
               FAQ
-            </Link>
-            <Link
-              href="/#testimonials"
-              className="text-white hover:text-secondary transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Testimonials
             </Link>
             <Link
               href="/visit-us"

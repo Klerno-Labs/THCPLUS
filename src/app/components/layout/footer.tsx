@@ -68,14 +68,6 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="#testimonials"
-                  className="text-gray-300 hover:text-secondary transition-colors"
-                >
-                  Testimonials
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/visit-us"
                   className="text-gray-300 hover:text-secondary transition-colors"
                 >
