@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Twitter } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Twitter, User } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -31,7 +31,8 @@ export function Footer() {
               <span className="font-bold text-xl">THC Plus</span>
             </div>
             <p className="text-gray-300 text-sm">
-              Your trusted source for premium hemp products in Houston, TX. Quality, education, and customer service are our priorities.
+              Your trusted source for premium hemp products in Houston, TX. Quality, education, and
+              customer service are our priorities.
             </p>
           </motion.div>
 
@@ -45,12 +46,18 @@ export function Footer() {
             <h3 className="text-secondary font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#about" className="text-gray-300 hover:text-secondary transition-colors">
+                <Link
+                  href="#about"
+                  className="text-gray-300 hover:text-secondary transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/education" className="text-gray-300 hover:text-secondary transition-colors">
+                <Link
+                  href="/education"
+                  className="text-gray-300 hover:text-secondary transition-colors"
+                >
                   Education
                 </Link>
               </li>
@@ -60,12 +67,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#testimonials" className="text-gray-300 hover:text-secondary transition-colors">
+                <Link
+                  href="#testimonials"
+                  className="text-gray-300 hover:text-secondary transition-colors"
+                >
                   Testimonials
                 </Link>
               </li>
               <li>
-                <Link href="/visit-us" className="text-gray-300 hover:text-secondary transition-colors">
+                <Link
+                  href="/visit-us"
+                  className="text-gray-300 hover:text-secondary transition-colors"
+                >
                   Visit Us
                 </Link>
               </li>
@@ -82,9 +95,13 @@ export function Footer() {
             <h3 className="text-secondary font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-2">
-                <MapPin className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <MapPin
+                  className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
                 <span className="text-gray-300 text-sm">
-                  8302 N Eldridge Pkwy<br />
+                  8302 N Eldridge Pkwy
+                  <br />
                   Houston, TX 77041
                 </span>
               </li>
@@ -153,16 +170,25 @@ export function Footer() {
           <p className="text-gray-400 text-sm">
             &copy; {new Date().getFullYear()} THC Plus Smoke Company. All Rights Reserved.
           </p>
+          <Link
+            href="/admin/login"
+            className="inline-flex items-center gap-1 text-gray-500 hover:text-gray-400 transition-colors text-xs mt-2"
+            aria-label="Staff Login"
+          >
+            <User className="h-3 w-3" aria-hidden="true" />
+            Staff
+          </Link>
           <p className="text-gray-500 text-xs mt-4 max-w-4xl mx-auto leading-relaxed">
-            Must be 21 or over to purchase these products or visit locations. This product contains industrial
-            (Lab Tested) hemp (Hemp Flower) that was grown pursuant to state and federal law (Containing not
-            more than 0.3% delta-9 THC on a dry weight basis) by licensed farmers in accordance with the
-            industrial Hemp provisions of the Agricultural Act of 2014 (known as the &quot;Farm Act&quot;) and its
-            state law counterparts thus it is not subject to regulation, or control, under the Federal
-            Controlled Substances Act. The FDA has not evaluated this product and these statements for
-            safety or efficacy. As with any new product, consult your physician before consuming this
-            product. Do not consume if pregnant or breastfeeding. This hemp-derived product may contain
-            trace amounts of Delta-9 THC in accordance with the 2018 Farm Bill.
+            Must be 21 or over to purchase these products or visit locations. This product contains
+            industrial (Lab Tested) hemp (Hemp Flower) that was grown pursuant to state and federal
+            law (Containing not more than 0.3% delta-9 THC on a dry weight basis) by licensed
+            farmers in accordance with the industrial Hemp provisions of the Agricultural Act of
+            2014 (known as the &quot;Farm Act&quot;) and its state law counterparts thus it is not
+            subject to regulation, or control, under the Federal Controlled Substances Act. The FDA
+            has not evaluated this product and these statements for safety or efficacy. As with any
+            new product, consult your physician before consuming this product. Do not consume if
+            pregnant or breastfeeding. This hemp-derived product may contain trace amounts of
+            Delta-9 THC in accordance with the 2018 Farm Bill.
           </p>
         </div>
       </div>
