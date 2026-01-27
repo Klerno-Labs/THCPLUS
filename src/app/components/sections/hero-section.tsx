@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import { Button } from '../ui/button'
 import Link from 'next/link'
-import { SmokeParticles } from '../effects/smoke-particles'
 
 export function HeroSection() {
   return (
@@ -17,22 +16,6 @@ export function HeroSection() {
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-primary/90" />
-      </div>
-
-      {/* Realistic rising smoke effect */}
-      <div className="absolute inset-0 z-20">
-        <SmokeParticles
-          count={20}
-          variant="rising"
-          speed="medium"
-          opacity={1}
-          colors={[
-            'rgba(255, 255, 255, 0.4)',  // White smoke
-            'rgba(240, 240, 240, 0.35)', // Light gray
-            'rgba(200, 200, 200, 0.3)',  // Medium gray
-            'rgba(255, 255, 255, 0.45)', // Brighter white
-          ]}
-        />
       </div>
 
       {/* Content */}
@@ -54,8 +37,8 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Houston&apos;s premier destination for premium, lab-tested hemp products.
-          Experience quality, education, and exceptional customer service.
+          Houston&apos;s premier destination for premium, lab-tested hemp products. Experience
+          quality, education, and exceptional customer service.
         </motion.p>
 
         <motion.div
@@ -64,10 +47,19 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <Button asChild size="lg" className="bg-secondary text-primary hover:bg-secondary/90 font-semibold">
+          <Button
+            asChild
+            size="lg"
+            className="bg-secondary text-primary hover:bg-secondary/90 font-semibold"
+          >
             <Link href="/visit-us">Visit Our Shop</Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="border-white text-white bg-transparent hover:bg-white/20">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-white text-white bg-transparent hover:bg-white/20"
+          >
             <Link href="/education">Learn More</Link>
           </Button>
         </motion.div>

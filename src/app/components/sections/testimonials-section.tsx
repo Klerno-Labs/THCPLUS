@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react'
 import { Button } from '../ui/button'
-import { SmokeParticles } from '../effects/smoke-particles'
 
 const testimonials = [
   {
@@ -50,20 +49,6 @@ export function TestimonialsSection() {
 
   return (
     <section id="testimonials" className="relative py-20 bg-primary overflow-hidden">
-      {/* White smoke particles for dark background */}
-      <SmokeParticles
-        count={12}
-        variant="swirling"
-        speed="slow"
-        opacity={0.8}
-        colors={[
-          'rgba(255, 255, 255, 0.3)',
-          'rgba(240, 240, 240, 0.25)',
-          'rgba(220, 220, 220, 0.2)',
-          'rgba(255, 255, 255, 0.35)',
-        ]}
-      />
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -72,9 +57,7 @@ export function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            What Our Customers Say
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">What Our Customers Say</h2>
           <p className="text-gray-300 max-w-2xl mx-auto mb-6">
             Don&apos;t just take our word for it. Here&apos;s what our valued customers have to say
             about their experience at 3rd Coast Smoke Company.

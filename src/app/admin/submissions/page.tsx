@@ -58,7 +58,7 @@ export default async function AdminSubmissionsPage({
   ])
 
   return (
-    <div className="space-y-6">
+    <div className="pt-24 pb-12 px-4 md:px-6 space-y-6">
       {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Contact Submissions</h1>

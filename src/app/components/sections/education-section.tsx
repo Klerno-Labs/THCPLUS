@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { ArrowRight, BookOpen, FlaskConical, Scale } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { SmokeParticles } from '../effects/smoke-particles'
 
 const topics = [
   {
@@ -31,20 +30,6 @@ const topics = [
 export function EducationSection() {
   return (
     <section className="relative py-20 bg-primary/5 overflow-hidden">
-      {/* Subtle ambient smoke */}
-      <SmokeParticles
-        count={10}
-        variant="ambient"
-        speed="slow"
-        opacity={0.7}
-        colors={[
-          'rgba(210, 210, 210, 0.3)',
-          'rgba(230, 230, 230, 0.25)',
-          'rgba(190, 190, 190, 0.25)',
-          'rgba(220, 220, 220, 0.3)',
-        ]}
-      />
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -53,12 +38,10 @@ export function EducationSection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Education Hub
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Education Hub</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Knowledge is power. We believe in empowering our customers with the information
-            they need to make informed decisions about hemp products.
+            Knowledge is power. We believe in empowering our customers with the information they
+            need to make informed decisions about hemp products.
           </p>
         </motion.div>
 
