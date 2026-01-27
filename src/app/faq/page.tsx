@@ -97,19 +97,14 @@ export default function FAQPage() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-20">
       <div className="container mx-auto px-4 max-w-4xl">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="text-center mb-12 animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
             Frequently Asked Questions
           </h1>
           <p className="text-gray-600 text-lg">
             Everything you need to know about our products, services, and policies
           </p>
-        </motion.div>
+        </div>
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
@@ -124,12 +119,7 @@ export default function FAQPage() {
           ))}
         </div>
 
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
+        <div className="mt-16 text-center animate-fade-in animation-delay-400">
           <Card className="border-primary/20 bg-primary/5">
             <CardContent className="p-8">
               <h2 className="text-2xl font-bold text-primary mb-4">Still Have Questions?</h2>
@@ -153,7 +143,7 @@ export default function FAQPage() {
               </div>
             </CardContent>
           </Card>
-        </motion.div>
+        </div>
       </div>
     </div>
   )

@@ -22,23 +22,11 @@ export default function VisitUsPage() {
       {/* Hero Section */}
       <section className="bg-primary text-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Visit Our Store
-          </motion.h1>
-          <motion.p
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">Visit Our Store</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto animate-fade-in animation-delay-200">
             Experience the THC Plus difference in person. Our Houston location offers a premium
             shopping experience with expert guidance.
-          </motion.p>
+          </p>
         </div>
       </section>
 

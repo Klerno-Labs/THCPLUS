@@ -2,45 +2,43 @@
 
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
-import {
-  FlaskConical,
-  Scale,
-  BookOpen,
-  Leaf,
-  AlertCircle,
-  CheckCircle,
-  Info
-} from 'lucide-react'
+import { FlaskConical, Scale, BookOpen, Leaf, AlertCircle, CheckCircle, Info } from 'lucide-react'
 
 const cannabinoids = [
   {
     name: 'Delta-8 THC',
-    description: 'A naturally occurring cannabinoid with milder psychoactive effects than Delta-9 THC. Known for providing a clear-headed, relaxing experience.',
+    description:
+      'A naturally occurring cannabinoid with milder psychoactive effects than Delta-9 THC. Known for providing a clear-headed, relaxing experience.',
     effects: ['Relaxation', 'Mild euphoria', 'Appetite stimulation', 'Pain relief'],
   },
   {
     name: 'Delta-9 THC',
-    description: 'The primary psychoactive compound in cannabis. Hemp-derived Delta-9 products are legal when containing less than 0.3% by dry weight.',
+    description:
+      'The primary psychoactive compound in cannabis. Hemp-derived Delta-9 products are legal when containing less than 0.3% by dry weight.',
     effects: ['Euphoria', 'Relaxation', 'Altered perception', 'Increased appetite'],
   },
   {
     name: 'THCA',
-    description: 'The acidic precursor to THC. Non-psychoactive in its raw form but converts to THC when heated (decarboxylation).',
+    description:
+      'The acidic precursor to THC. Non-psychoactive in its raw form but converts to THC when heated (decarboxylation).',
     effects: ['Anti-inflammatory', 'Neuroprotective', 'Anti-nausea', 'Non-intoxicating when raw'],
   },
   {
     name: 'HHC',
-    description: 'Hexahydrocannabinol is a hydrogenated form of THC. It provides effects similar to THC with potentially longer shelf stability.',
+    description:
+      'Hexahydrocannabinol is a hydrogenated form of THC. It provides effects similar to THC with potentially longer shelf stability.',
     effects: ['Euphoria', 'Relaxation', 'Pain relief', 'Mood elevation'],
   },
   {
     name: 'CBD',
-    description: 'Cannabidiol is non-psychoactive and widely used for its potential therapeutic benefits without the "high" associated with THC.',
+    description:
+      'Cannabidiol is non-psychoactive and widely used for its potential therapeutic benefits without the "high" associated with THC.',
     effects: ['Anxiety relief', 'Pain management', 'Anti-inflammatory', 'Sleep support'],
   },
   {
     name: 'CBN',
-    description: 'Cannabinol is a mildly psychoactive cannabinoid that forms as THC ages. Often associated with sedative effects.',
+    description:
+      'Cannabinol is a mildly psychoactive cannabinoid that forms as THC ages. Often associated with sedative effects.',
     effects: ['Sedation', 'Sleep aid', 'Pain relief', 'Appetite stimulation'],
   },
 ]
@@ -48,22 +46,26 @@ const cannabinoids = [
 const productTypes = [
   {
     name: 'Flower',
-    description: 'The dried and cured buds of the hemp plant. Can be smoked, vaporized, or used for cooking.',
+    description:
+      'The dried and cured buds of the hemp plant. Can be smoked, vaporized, or used for cooking.',
     icon: Leaf,
   },
   {
     name: 'Edibles',
-    description: 'Food products infused with cannabinoids. Effects take longer to onset but last longer than inhalation.',
+    description:
+      'Food products infused with cannabinoids. Effects take longer to onset but last longer than inhalation.',
     icon: Info,
   },
   {
     name: 'Vapes',
-    description: 'Vaporizer cartridges and disposables. Provide fast-acting effects with discretion and convenience.',
+    description:
+      'Vaporizer cartridges and disposables. Provide fast-acting effects with discretion and convenience.',
     icon: FlaskConical,
   },
   {
     name: 'Tinctures',
-    description: 'Liquid extracts taken sublingually. Offer precise dosing and faster absorption than edibles.',
+    description:
+      'Liquid extracts taken sublingually. Offer precise dosing and faster absorption than edibles.',
     icon: FlaskConical,
   },
 ]
@@ -74,23 +76,11 @@ export default function EducationPage() {
       {/* Hero Section */}
       <section className="bg-primary text-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <motion.h1
-            className="text-4xl md:text-5xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Education Hub
-          </motion.h1>
-          <motion.p
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Knowledge is power. Learn about cannabinoids, product types, and the legal landscape
-            of hemp-derived products.
-          </motion.p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">Education Hub</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto animate-fade-in animation-delay-200">
+            Knowledge is power. Learn about cannabinoids, product types, and the legal landscape of
+            hemp-derived products.
+          </p>
         </div>
       </section>
 
@@ -108,8 +98,8 @@ export default function EducationPage() {
               Understanding Cannabinoids
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Cannabinoids are naturally occurring compounds found in the cannabis plant.
-              Each has unique properties and effects.
+              Cannabinoids are naturally occurring compounds found in the cannabis plant. Each has
+              unique properties and effects.
             </p>
           </motion.div>
 
@@ -158,9 +148,7 @@ export default function EducationPage() {
             viewport={{ once: true }}
           >
             <Scale className="h-16 w-16 text-primary mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-              Legal Information
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Legal Information</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Understanding the legal status of hemp-derived products.
             </p>
@@ -182,10 +170,11 @@ export default function EducationPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 mb-4">
-                    The Agriculture Improvement Act of 2018 (2018 Farm Bill) federally legalized hemp
-                    and hemp-derived products containing less than 0.3% Delta-9 THC by dry weight.
-                    This landmark legislation removed hemp from the Controlled Substances Act and
-                    opened the door for legal hemp production and sales across the United States.
+                    The Agriculture Improvement Act of 2018 (2018 Farm Bill) federally legalized
+                    hemp and hemp-derived products containing less than 0.3% Delta-9 THC by dry
+                    weight. This landmark legislation removed hemp from the Controlled Substances
+                    Act and opened the door for legal hemp production and sales across the United
+                    States.
                   </p>
                   <p className="text-gray-600">
                     Under this law, hemp-derived cannabinoids like Delta-8 THC, HHC, and THCA are
@@ -267,9 +256,7 @@ export default function EducationPage() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-              Product Types
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Product Types</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Hemp products come in many forms, each with its own benefits and use cases.
             </p>
@@ -310,12 +297,11 @@ export default function EducationPage() {
             viewport={{ once: true }}
           >
             <FlaskConical className="h-16 w-16 text-secondary mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Why Lab Testing Matters
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Lab Testing Matters</h2>
             <p className="text-lg text-gray-300 mb-8">
-              All products at 3rd Coast Smoke Company undergo rigorous third-party laboratory testing.
-              This ensures our products are safe, accurately labeled, and free from harmful contaminants.
+              All products at 3rd Coast Smoke Company undergo rigorous third-party laboratory
+              testing. This ensures our products are safe, accurately labeled, and free from harmful
+              contaminants.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-white/10 rounded-lg p-6">
@@ -360,24 +346,31 @@ export default function EducationPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">
-                  The golden rule for hemp-derived cannabinoids is to start with a low dose and gradually increase
-                  until you find your optimal dosage. Everyone&apos;s tolerance and body chemistry is different.
+                  The golden rule for hemp-derived cannabinoids is to start with a low dose and
+                  gradually increase until you find your optimal dosage. Everyone&apos;s tolerance
+                  and body chemistry is different.
                 </p>
                 <div className="space-y-4">
                   <div className="bg-primary/5 rounded-lg p-4">
                     <h4 className="font-semibold text-primary mb-2">Beginners (Low Tolerance)</h4>
                     <p className="text-sm text-gray-600">
-                      5-10mg THC equivalent | Wait 2 hours before increasing dose (edibles) or 30 minutes (vapes/flower)
+                      5-10mg THC equivalent | Wait 2 hours before increasing dose (edibles) or 30
+                      minutes (vapes/flower)
                     </p>
                   </div>
                   <div className="bg-primary/5 rounded-lg p-4">
-                    <h4 className="font-semibold text-primary mb-2">Intermediate (Moderate Tolerance)</h4>
+                    <h4 className="font-semibold text-primary mb-2">
+                      Intermediate (Moderate Tolerance)
+                    </h4>
                     <p className="text-sm text-gray-600">
-                      10-20mg THC equivalent | Effects may be felt more quickly, still wait adequate time between doses
+                      10-20mg THC equivalent | Effects may be felt more quickly, still wait adequate
+                      time between doses
                     </p>
                   </div>
                   <div className="bg-primary/5 rounded-lg p-4">
-                    <h4 className="font-semibold text-primary mb-2">Experienced (High Tolerance)</h4>
+                    <h4 className="font-semibold text-primary mb-2">
+                      Experienced (High Tolerance)
+                    </h4>
                     <p className="text-sm text-gray-600">
                       20mg+ THC equivalent | Know your limits and always consume responsibly
                     </p>
@@ -398,19 +391,22 @@ export default function EducationPage() {
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
                     <div>
-                      <strong className="text-primary">Vapes/Smoking:</strong> Effects in 5-15 minutes, peak at 30-60 minutes, last 2-4 hours
+                      <strong className="text-primary">Vapes/Smoking:</strong> Effects in 5-15
+                      minutes, peak at 30-60 minutes, last 2-4 hours
                     </div>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
                     <div>
-                      <strong className="text-primary">Tinctures (Sublingual):</strong> Effects in 15-45 minutes, peak at 1-2 hours, last 4-6 hours
+                      <strong className="text-primary">Tinctures (Sublingual):</strong> Effects in
+                      15-45 minutes, peak at 1-2 hours, last 4-6 hours
                     </div>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
                     <div>
-                      <strong className="text-primary">Edibles:</strong> Effects in 45 minutes-2 hours, peak at 2-4 hours, last 6-8 hours
+                      <strong className="text-primary">Edibles:</strong> Effects in 45 minutes-2
+                      hours, peak at 2-4 hours, last 6-8 hours
                     </div>
                   </li>
                 </ul>
@@ -520,8 +516,9 @@ export default function EducationPage() {
                       Choose the Right Environment
                     </h3>
                     <p className="text-gray-600 ml-8">
-                      Use hemp products in a comfortable, familiar setting. Being at home with trusted friends
-                      or alone in a relaxed environment is ideal for your first experience.
+                      Use hemp products in a comfortable, familiar setting. Being at home with
+                      trusted friends or alone in a relaxed environment is ideal for your first
+                      experience.
                     </p>
                   </div>
 
@@ -531,8 +528,8 @@ export default function EducationPage() {
                       Clear Your Schedule
                     </h3>
                     <p className="text-gray-600 ml-8">
-                      Don&apos;t have any obligations or responsibilities for several hours after consuming.
-                      Give yourself time to fully experience the effects without stress.
+                      Don&apos;t have any obligations or responsibilities for several hours after
+                      consuming. Give yourself time to fully experience the effects without stress.
                     </p>
                   </div>
 
@@ -542,8 +539,8 @@ export default function EducationPage() {
                       Stay Hydrated & Have Snacks
                     </h3>
                     <p className="text-gray-600 ml-8">
-                      Keep water and light snacks nearby. Cannabinoids can cause dry mouth and may increase
-                      appetite. Having refreshments on hand enhances comfort.
+                      Keep water and light snacks nearby. Cannabinoids can cause dry mouth and may
+                      increase appetite. Having refreshments on hand enhances comfort.
                     </p>
                   </div>
 
@@ -553,9 +550,9 @@ export default function EducationPage() {
                       Be Patient with Edibles
                     </h3>
                     <p className="text-gray-600 ml-8">
-                      If trying edibles, resist the urge to take more if you don&apos;t feel effects immediately.
-                      It can take up to 2 hours for edibles to kick in. Wait at least 2 hours before considering
-                      an additional dose.
+                      If trying edibles, resist the urge to take more if you don&apos;t feel effects
+                      immediately. It can take up to 2 hours for edibles to kick in. Wait at least 2
+                      hours before considering an additional dose.
                     </p>
                   </div>
 
@@ -565,9 +562,10 @@ export default function EducationPage() {
                       Know How to &ldquo;Come Down&rdquo;
                     </h3>
                     <p className="text-gray-600 ml-8">
-                      If effects feel too strong, remember: it&apos;s temporary and you&apos;ll be fine. Try deep breathing,
-                      eating something, drinking water, or taking a nap. Black pepper and CBD can also help reduce
-                      intensity. The effects will pass with time.
+                      If effects feel too strong, remember: it&apos;s temporary and you&apos;ll be
+                      fine. Try deep breathing, eating something, drinking water, or taking a nap.
+                      Black pepper and CBD can also help reduce intensity. The effects will pass
+                      with time.
                     </p>
                   </div>
                 </div>
