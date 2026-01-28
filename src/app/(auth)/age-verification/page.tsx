@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { Button } from '../../components/ui/button'
 import { verifyAge } from '../../actions/verify-age'
+import { trackAgeVerification } from '@/lib/analytics'
 
 export default function AgeVerificationPage() {
   const router = useRouter()
@@ -18,6 +18,9 @@ export default function AgeVerificationPage() {
       const result = await verifyAge(true)
 
       if (result.success) {
+        // Track successful age verification
+        trackAgeVerification(true)
+
         // Session created successfully - redirect to home
         router.push('/')
         router.refresh() // Force refresh to update middleware check
@@ -33,31 +36,26 @@ export default function AgeVerificationPage() {
   }
 
   const handleDeny = () => {
+    // Track age verification denial
+    trackAgeVerification(false)
+
     // Client-side redirect to avoid CSP warnings
     window.location.href = 'https://www.google.com'
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-primary p-4">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-md w-full bg-white rounded-xl shadow-2xl p-8"
-      >
+      <div className="max-w-md w-full bg-white rounded-xl shadow-2xl p-8 animate-scale-in">
         <div className="text-center">
           <div className="w-20 h-20 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-primary font-bold text-lg">THC+</span>
           </div>
 
-          <h1 className="text-3xl font-bold text-primary mb-4">
-            Age Verification Required
-          </h1>
+          <h1 className="text-3xl font-bold text-primary mb-4">Age Verification Required</h1>
 
           <p className="text-gray-600 mb-8">
-            You must be 21 years of age or older to enter this website.
-            By clicking &quot;I am 21 or older&quot;, you confirm that you meet
-            the age requirement.
+            You must be 21 years of age or older to enter this website. By clicking &quot;I am 21 or
+            older&quot;, you confirm that you meet the age requirement.
           </p>
 
           <div className="space-y-4">
@@ -92,12 +90,11 @@ export default function AgeVerificationPage() {
           </p>
 
           <p className="text-xs text-gray-400 mt-4">
-            This website contains information about products containing
-            hemp-derived cannabinoids. These products are intended for
-            adults 21 years of age or older.
+            This website contains information about products containing hemp-derived cannabinoids.
+            These products are intended for adults 21 years of age or older.
           </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import { Mail, ArrowRight } from 'lucide-react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
@@ -118,11 +117,7 @@ export function NewsletterSignup({ variant = 'card', className = '' }: Newslette
   return (
     <Card className={`border-none shadow-lg ${className}`}>
       <CardContent className="p-8 text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div className="animate-scale-in">
           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
             <Mail className="h-8 w-8 text-primary" />
           </div>
@@ -133,17 +128,13 @@ export function NewsletterSignup({ variant = 'card', className = '' }: Newslette
           </p>
 
           {isSubscribed ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="py-4"
-            >
+            <div className="py-4 animate-scale-in">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail className="h-8 w-8 text-green-600" />
               </div>
               <p className="text-green-600 font-semibold">Thanks for subscribing!</p>
               <p className="text-gray-600 text-sm mt-1">Check your email for confirmation.</p>
-            </motion.div>
+            </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input
@@ -167,7 +158,7 @@ export function NewsletterSignup({ variant = 'card', className = '' }: Newslette
               </p>
             </form>
           )}
-        </motion.div>
+        </div>
       </CardContent>
     </Card>
   )

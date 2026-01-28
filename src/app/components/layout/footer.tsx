@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Twitter, User } from 'lucide-react'
 
 export function Footer() {
@@ -11,12 +10,7 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          <div className="animate-fade-in-up">
             <div className="flex items-center space-x-3 mb-4">
               <div className="relative w-12 h-12">
                 <Image
@@ -34,15 +28,10 @@ export function Footer() {
               Your trusted source for premium hemp products in Houston, TX. Quality, education, and
               customer service are our priorities.
             </p>
-          </motion.div>
+          </div>
 
           {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+          <div className="animate-fade-in-up animation-delay-100">
             <h3 className="text-secondary font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
@@ -75,15 +64,10 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </motion.div>
+          </div>
 
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <div className="animate-fade-in-up animation-delay-200">
             <h3 className="text-secondary font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-2">
@@ -106,15 +90,10 @@ export function Footer() {
                 <span className="text-gray-300 text-sm">info@thcplus.com</span>
               </li>
             </ul>
-          </motion.div>
+          </div>
 
           {/* Hours */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
+          <div className="animate-fade-in-up animation-delay-300">
             <h3 className="text-secondary font-semibold mb-4">Hours</h3>
             <ul className="space-y-2">
               <li className="flex items-center space-x-2">
@@ -155,7 +134,7 @@ export function Footer() {
                 <Twitter className="h-6 w-6" aria-hidden="true" />
               </a>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">

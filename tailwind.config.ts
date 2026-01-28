@@ -1,10 +1,10 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -35,8 +35,8 @@ const config: Config = {
         ring: 'hsl(var(--ring))',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['Space Mono', 'monospace'],
+        sans: ['var(--font-inter)', 'sans-serif'],
+        mono: ['var(--font-space-mono)', 'monospace'],
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -44,8 +44,8 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       animation: {
-        'float': 'float 3s ease-in-out infinite',
-        'smoke': 'smoke 4s ease-in-out infinite',
+        float: 'float 3s ease-in-out infinite',
+        smoke: 'smoke 4s ease-in-out infinite',
         'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
       },
@@ -72,6 +72,6 @@ const config: Config = {
     },
   },
   plugins: [],
-};
+}
 
-export default config;
+export default config

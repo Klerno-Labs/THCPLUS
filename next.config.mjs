@@ -102,11 +102,6 @@ const sentryWebpackPluginOptions = {
   // Auth token for uploading source maps
   authToken: process.env.SENTRY_AUTH_TOKEN,
 
-  // Automatically annotate React components for better error messages
-  reactComponentAnnotation: {
-    enabled: true,
-  },
-
   // Disable telemetry
   telemetry: false,
 
@@ -119,6 +114,14 @@ const sentryWebpackPluginOptions = {
 
   // Automatically tree-shake Sentry debug code in production
   widenClientFileUpload: true,
+
+  // Webpack-specific configuration
+  webpack: {
+    // Automatically annotate React components for better error messages
+    reactComponentAnnotation: {
+      enabled: true,
+    },
+  },
 }
 
 // Wrap config with Sentry and Bundle Analyzer

@@ -60,6 +60,12 @@ export function Header() {
             About
           </Link>
           <Link
+            href="/products"
+            className="text-white hover:text-secondary transition-colors font-medium"
+          >
+            Products
+          </Link>
+          <Link
             href="/education"
             className="text-white hover:text-secondary transition-colors font-medium"
           >
@@ -111,6 +117,13 @@ export function Header() {
               onClick={() => setIsOpen(false)}
             >
               About
+            </Link>
+            <Link
+              href="/products"
+              className="text-white hover:text-secondary transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Products
             </Link>
             <Link
               href="/education"

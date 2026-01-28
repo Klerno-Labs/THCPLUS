@@ -1,0 +1,19 @@
+<svg width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="800" fill="#F3F4F6"/>
+
+  <!-- Icon Container -->
+  <circle cx="400" cy="350" r="80" fill="#D1D5DB"/>
+
+  <!-- Image Icon -->
+  <path d="M400 310C380.67 310 365 325.67 365 345C365 364.33 380.67 380 400 380C419.33 380 435 364.33 435 345C435 325.67 419.33 310 400 310ZM400 370C386.19 370 375 358.81 375 345C375 331.19 386.19 320 400 320C413.81 320 425 331.19 425 345C425 358.81 413.81 370 400 370Z" fill="#9CA3AF"/>
+  <path d="M345 430L365 410L400 445L435 410L455 430L455 460L345 460L345 430Z" fill="#9CA3AF"/>
+
+  <!-- Text -->
+  <text x="400" y="520" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="600" fill="#6B7280" text-anchor="middle">
+    Product Image
+  </text>
+  <text x="400" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#9CA3AF" text-anchor="middle">
+    Image not available
+  </text>
+</svg>

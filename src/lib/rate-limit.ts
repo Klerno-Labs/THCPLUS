@@ -10,14 +10,19 @@
 import { Redis } from '@upstash/redis'
 import { Ratelimit } from '@upstash/ratelimit'
 
-// Initialize Redis client (only if credentials are provided)
-const redis =
-  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
-    ? new Redis({
-        url: process.env.UPSTASH_REDIS_REST_URL,
-        token: process.env.UPSTASH_REDIS_REST_TOKEN,
-      })
-    : null
+// Initialize Redis client (only if valid credentials are provided)
+// Check that URLs start with https:// to avoid placeholder values
+const isRedisConfigured =
+  process.env.UPSTASH_REDIS_REST_URL?.startsWith('https://') &&
+  process.env.UPSTASH_REDIS_REST_TOKEN &&
+  process.env.UPSTASH_REDIS_REST_TOKEN !== 'your_upstash_redis_token_here'
+
+const redis = isRedisConfigured
+  ? new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    })
+  : null
 
 /**
  * Rate limiter for contact form submissions
