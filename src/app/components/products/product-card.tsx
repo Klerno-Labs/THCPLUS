@@ -58,20 +58,20 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
       </div>
 
-      <CardContent className="p-5">
+      <CardContent className="p-6">
         {/* Category Badge */}
-        <div className="mb-2">
+        <div className="mb-3">
           <Badge variant="outline" className="text-xs capitalize">
             {product.category.replace('-', ' ')}
           </Badge>
         </div>
 
         {/* Product Name */}
-        <h3 className="font-semibold text-lg mb-2 line-clamp-2 min-h-[3.5rem]">{product.name}</h3>
+        <h3 className="font-semibold text-lg mb-3 line-clamp-2 min-h-[3.5rem]">{product.name}</h3>
 
         {/* Cannabinoid Badges */}
         {product.cannabinoids && product.cannabinoids.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-3">
+          <div className="flex flex-wrap gap-2 mb-4">
             {product.cannabinoids.map((cannabinoid) => (
               <Badge
                 key={cannabinoid}
@@ -85,12 +85,10 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
 
         {/* Description */}
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2 min-h-[2.5rem]">
-          {product.description}
-        </p>
+        <p className="text-sm text-gray-600 mb-4 line-clamp-3">{product.description}</p>
 
         {/* Product Details */}
-        <div className="space-y-1 mb-4 text-xs text-gray-600">
+        <div className="space-y-2 mb-4 text-sm text-gray-600">
           {product.thcContent && (
             <div className="flex justify-between">
               <span>THC Content:</span>
@@ -118,17 +116,17 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Brand and Stock Status */}
-        <div className="flex items-center justify-between border-t pt-4">
+        <div className="flex items-center justify-between border-t border-gray-200 pt-4 mt-4">
           {product.brand && <p className="text-sm font-medium text-gray-700">{product.brand}</p>}
 
           {/* In Stock Indicator */}
           <div className="flex items-center gap-2 ml-auto">
             <div
-              className={`w-2 h-2 rounded-full ${
+              className={`w-2.5 h-2.5 rounded-full ${
                 product.inStock ? 'bg-emerald-500' : 'bg-red-500'
               }`}
             />
-            <span className="text-xs text-gray-600">
+            <span className="text-sm font-medium text-gray-600">
               {product.inStock ? 'In Stock' : 'Out of Stock'}
             </span>
           </div>

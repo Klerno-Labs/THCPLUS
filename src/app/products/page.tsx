@@ -81,11 +81,11 @@ export default function ProductsPage() {
     selectedCategory !== 'all' || selectedCannabinoid !== null || searchQuery !== '' || inStockOnly
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Premium Selection</h1>
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Premium Selection</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Browse our curated collection of high-quality hemp and CBD products. All products are
             lab-tested and legally compliant.
@@ -93,7 +93,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Filters Section */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div className="bg-white rounded-lg shadow-sm p-8 mb-10">
           {/* Search Bar */}
           <div className="mb-6">
             <Input
@@ -168,14 +168,14 @@ export default function ProductsPage() {
         </div>
 
         {/* Results Count */}
-        <div className="mb-6 text-sm text-gray-600">
+        <div className="mb-8 text-sm text-gray-600">
           Showing <span className="font-semibold">{filteredProducts.length}</span> of{' '}
           <span className="font-semibold">{products.length}</span> products
         </div>
 
         {/* Products Grid */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
