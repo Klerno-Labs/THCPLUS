@@ -1,6 +1,7 @@
 import { auth } from '@/lib/auth'
 import { Card } from '@/app/components/ui/card'
 import { Settings as SettingsIcon, User, Bell, Shield } from 'lucide-react'
+import { ChangePasswordForm } from '@/app/components/admin/change-password-form'
 
 /**
  * Admin Settings Page
@@ -92,36 +93,40 @@ export default async function AdminSettingsPage() {
         </div>
       </Card>
 
-      {/* Security Settings */}
+      {/* Security Settings - Change Password */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-6">
           <Shield className="w-6 h-6 text-primary-600" />
           <h2 className="text-xl font-bold text-gray-900">Security</h2>
         </div>
 
-        <div className="space-y-4">
-          <div className="flex items-center justify-between py-3 border-b border-gray-200">
-            <div>
-              <p className="font-medium text-gray-900">Password</p>
-              <p className="text-sm text-gray-500">Change your password</p>
-            </div>
-            <div className="text-sm font-medium text-gray-600">Coming soon</div>
+        <div className="space-y-6">
+          {/* Password Change Section */}
+          <div>
+            <h3 className="font-medium text-gray-900 mb-1">Change Password</h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Update your password to keep your account secure
+            </p>
+            <ChangePasswordForm />
           </div>
 
-          <div className="flex items-center justify-between py-3 border-b border-gray-200">
-            <div>
-              <p className="font-medium text-gray-900">Two-Factor Authentication</p>
-              <p className="text-sm text-gray-500">Add an extra layer of security</p>
+          {/* Future Features */}
+          <div className="border-t pt-6 space-y-4">
+            <div className="flex items-center justify-between py-3 border-b border-gray-200">
+              <div>
+                <p className="font-medium text-gray-900">Two-Factor Authentication</p>
+                <p className="text-sm text-gray-500">Add an extra layer of security</p>
+              </div>
+              <div className="text-sm font-medium text-gray-600">Coming soon</div>
             </div>
-            <div className="text-sm font-medium text-gray-600">Coming soon</div>
-          </div>
 
-          <div className="flex items-center justify-between py-3">
-            <div>
-              <p className="font-medium text-gray-900">Login History</p>
-              <p className="text-sm text-gray-500">View recent login activity</p>
+            <div className="flex items-center justify-between py-3">
+              <div>
+                <p className="font-medium text-gray-900">Login History</p>
+                <p className="text-sm text-gray-500">View recent login activity</p>
+              </div>
+              <div className="text-sm font-medium text-gray-600">Coming soon</div>
             </div>
-            <div className="text-sm font-medium text-gray-600">Coming soon</div>
           </div>
         </div>
       </Card>
