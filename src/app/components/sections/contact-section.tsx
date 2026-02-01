@@ -14,6 +14,10 @@ import { contactFormSchema, type ContactFormData } from '@/lib/validations/conta
 import { submitContactForm } from '@/app/actions/contact-form'
 import { trackContactFormSubmit, trackPhoneClick } from '@/lib/analytics'
 
+// Check if reCAPTCHA is properly configured
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''
+const isRecaptchaEnabled = RECAPTCHA_SITE_KEY.length > 0 && !RECAPTCHA_SITE_KEY.includes('your_')
+
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -39,8 +43,8 @@ export function ContactSection() {
   }
 
   const onSubmit = async (data: Omit<ContactFormData, 'captchaToken'>) => {
-    // Validate captcha token
-    if (!captchaToken) {
+    // Validate captcha token only if reCAPTCHA is enabled
+    if (isRecaptchaEnabled && !captchaToken) {
       setError('captchaToken', {
         type: 'manual',
         message: 'Please complete the captcha verification',
@@ -53,7 +57,7 @@ export function ContactSection() {
     try {
       const result = await submitContactForm({
         ...data,
-        captchaToken,
+        captchaToken: captchaToken || 'recaptcha-disabled',
       })
 
       if (result.success) {
@@ -98,9 +102,7 @@ export function ContactSection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Get in Touch
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Get in Touch</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll
             respond as soon as possible.
@@ -202,7 +204,10 @@ export function ContactSection() {
                 ) : (
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium text-gray-700 mb-2"
+                      >
                         Name
                       </label>
                       <Input
@@ -221,7 +226,10 @@ export function ContactSection() {
                       )}
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700 mb-2"
+                      >
                         Email
                       </label>
                       <Input
@@ -240,7 +248,10 @@ export function ContactSection() {
                       )}
                     </div>
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label
+                        htmlFor="message"
+                        className="block text-sm font-medium text-gray-700 mb-2"
+                      >
                         Message
                       </label>
                       <textarea
@@ -260,19 +271,21 @@ export function ContactSection() {
                         </p>
                       )}
                     </div>
-                    <div>
-                      <ReCAPTCHA
-                        ref={recaptchaRef}
-                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
-                        onChange={onCaptchaChange}
-                        theme="light"
-                      />
-                      {errors.captchaToken && (
-                        <p className="text-red-500 text-sm mt-1" role="alert">
-                          {errors.captchaToken.message}
-                        </p>
-                      )}
-                    </div>
+                    {isRecaptchaEnabled && (
+                      <div>
+                        <ReCAPTCHA
+                          ref={recaptchaRef}
+                          sitekey={RECAPTCHA_SITE_KEY}
+                          onChange={onCaptchaChange}
+                          theme="light"
+                        />
+                        {errors.captchaToken && (
+                          <p className="text-red-500 text-sm mt-1" role="alert">
+                            {errors.captchaToken.message}
+                          </p>
+                        )}
+                      </div>
+                    )}
                     <Button
                       type="submit"
                       className="w-full bg-primary hover:bg-primary/90"

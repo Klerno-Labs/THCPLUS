@@ -55,18 +55,21 @@ export async function submitContactForm(data: ContactFormData): Promise<ApiRespo
     // 1. Validate input data
     const validatedData = contactFormSchema.parse(data)
 
-    // 2. Verify reCAPTCHA token
-    const isCaptchaValid = await verifyRecaptcha(validatedData.captchaToken)
-    if (!isCaptchaValid) {
-      return {
-        success: false,
-        error: 'Captcha verification failed. Please try again.',
+    // 2. Verify reCAPTCHA token (skip if disabled)
+    if (validatedData.captchaToken !== 'recaptcha-disabled') {
+      const isCaptchaValid = await verifyRecaptcha(validatedData.captchaToken)
+      if (!isCaptchaValid) {
+        return {
+          success: false,
+          error: 'Captcha verification failed. Please try again.',
+        }
       }
     }
 
     // 3. Get request metadata
     const headersList = await headers()
-    const ipAddress = headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || 'unknown'
+    const ipAddress =
+      headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || 'unknown'
     const userAgent = headersList.get('user-agent') || 'unknown'
 
     // 4. Rate limiting check (3 submissions per hour per IP)
@@ -112,7 +115,7 @@ export async function submitContactForm(data: ContactFormData): Promise<ApiRespo
 
     return {
       success: true,
-      message: 'Thank you for your message! We\'ll get back to you soon.',
+      message: "Thank you for your message! We'll get back to you soon.",
     }
   } catch (error) {
     console.error('Contact form submission error:', error)
