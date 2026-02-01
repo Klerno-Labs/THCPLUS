@@ -3,14 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
-import {
-  LayoutDashboard,
-  Mail,
-  BarChart3,
-  Settings,
-  LogOut,
-  Shield
-} from 'lucide-react'
+import { LayoutDashboard, Mail, BarChart3, Settings, LogOut, Shield, Percent } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 /**
@@ -32,6 +25,11 @@ export function AdminNav() {
       name: 'Submissions',
       href: '/admin/submissions',
       icon: Mail,
+    },
+    {
+      name: 'Coupons',
+      href: '/admin/coupons',
+      icon: Percent,
     },
     {
       name: 'Analytics',

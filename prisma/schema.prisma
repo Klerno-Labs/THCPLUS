@@ -16,7 +16,7 @@ datasource db {
 model AgeVerification {
   id         String   @id @default(cuid())
   sessionId  String   @unique
-  ipAddress  String   // Hashed for privacy
+  ipAddress  String // Hashed for privacy
   userAgent  String
   verifiedAt DateTime @default(now())
   expiresAt  DateTime // 24-hour expiry
@@ -31,15 +31,15 @@ model AgeVerification {
 /// Contact form submissions
 /// Stores all contact inquiries from website visitors
 model ContactSubmission {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   name        String
   email       String
-  message     String   @db.Text
+  message     String    @db.Text
   ipAddress   String
   userAgent   String
-  submittedAt DateTime @default(now())
-  status      String   @default("new") // new, read, replied
-  notes       String?  @db.Text // Admin notes
+  submittedAt DateTime  @default(now())
+  status      String    @default("new") // new, read, replied
+  notes       String?   @db.Text // Admin notes
   repliedAt   DateTime?
   repliedBy   String?
 
@@ -63,4 +63,48 @@ model Admin {
 
   @@index([email])
   @@map("admins")
+}
+
+/// Coupons for in-store promotions
+/// Supports percentage and fixed amount discounts
+model Coupon {
+  id                 String    @id @default(cuid())
+  code               String    @unique
+  description        String
+  type               String // 'percentage' | 'fixed'
+  value              Float // Percentage (0-100) or fixed dollar amount
+  minPurchase        Float? // Minimum purchase amount required
+  maxUses            Int? // Maximum total uses (null = unlimited)
+  usesCount          Int       @default(0)
+  maxUsesPerCustomer Int? // Maximum uses per customer (null = unlimited)
+  startsAt           DateTime
+  expiresAt          DateTime?
+  isActive           Boolean   @default(true)
+  createdBy          String // Admin ID
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  redemptions CouponRedemption[]
+
+  @@index([code])
+  @@index([isActive])
+  @@index([expiresAt])
+  @@map("coupons")
+}
+
+/// Tracks coupon redemptions
+model CouponRedemption {
+  id             String   @id @default(cuid())
+  couponId       String
+  coupon         Coupon   @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  customerEmail  String? // Optional: track customer if provided
+  customerPhone  String? // Optional: track customer if provided
+  discountAmount Float // Actual discount applied
+  orderTotal     Float // Total order amount before discount
+  redeemedAt     DateTime @default(now())
+
+  @@index([couponId])
+  @@index([customerEmail])
+  @@index([redeemedAt])
+  @@map("coupon_redemptions")
 }

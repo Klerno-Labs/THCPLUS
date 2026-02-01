@@ -2,6 +2,8 @@ import { prisma } from '@/lib/db'
 import { Card } from '@/app/components/ui/card'
 import { Mail, CheckCircle, Clock, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
+import { DashboardStats } from '@/app/components/admin/dashboard-stats'
+import { VisitorTrendsChart, CouponPerformanceChart } from '@/app/components/admin/analytics-chart'
 
 // Force dynamic rendering (requires database at runtime)
 export const dynamic = 'force-dynamic'
@@ -73,27 +75,39 @@ export default async function AdminDashboardPage() {
       {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600 mt-1">Welcome back! Here is what is happening today.</p>
+        <p className="text-gray-600 mt-1">Welcome back! Here&apos;s what&apos;s happening today.</p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat) => {
-          const Icon = stat.icon
-          return (
-            <Card key={stat.name} className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">{stat.name}</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-2">{stat.value}</p>
+      {/* Enhanced Stats */}
+      <DashboardStats />
+
+      {/* Analytics Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <VisitorTrendsChart />
+        <CouponPerformanceChart />
+      </div>
+
+      {/* Contact Form Stats */}
+      <div>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Contact Form Submissions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat) => {
+            const Icon = stat.icon
+            return (
+              <Card key={stat.name} className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">{stat.name}</p>
+                    <p className="text-3xl font-bold text-gray-900 mt-2">{stat.value}</p>
+                  </div>
+                  <div className={`${stat.bgColor} ${stat.color} p-3 rounded-full`}>
+                    <Icon className="w-6 h-6" />
+                  </div>
                 </div>
-                <div className={`${stat.bgColor} ${stat.color} p-3 rounded-full`}>
-                  <Icon className="w-6 h-6" />
-                </div>
-              </div>
-            </Card>
-          )
-        })}
+              </Card>
+            )
+          })}
+        </div>
       </div>
 
       {/* Recent Submissions */}
