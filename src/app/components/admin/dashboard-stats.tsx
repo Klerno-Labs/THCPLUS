@@ -1,7 +1,6 @@
-'use client'
-
 import { Card } from '@/app/components/ui/card'
-import { TrendingUp, TrendingDown, Users, DollarSign, ShoppingCart, Percent } from 'lucide-react'
+import { TrendingUp, TrendingDown, Users, ShoppingCart, Percent, Mail } from 'lucide-react'
+import { prisma } from '@/lib/db'
 
 interface StatCardProps {
   title: string
@@ -29,6 +28,7 @@ function StatCard({ title, value, change, icon, trend }: StatCardProps) {
             <span
               className={`text-sm font-medium ${isPositive ? 'text-emerald-600' : 'text-red-600'}`}
             >
+              {change > 0 ? '+' : ''}
               {change}%
             </span>
             <span className="text-sm text-gray-500 ml-1">vs last month</span>
@@ -40,36 +40,96 @@ function StatCard({ title, value, change, icon, trend }: StatCardProps) {
   )
 }
 
-export function DashboardStats() {
-  // TODO: Replace with real data from API
+export async function DashboardStats() {
+  // Get real data from database
+  const now = new Date()
+  const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1)
+  const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1)
+  const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59)
+
+  const [
+    totalVerifications,
+    thisMonthVerifications,
+    lastMonthVerifications,
+    totalSubmissions,
+    thisMonthSubmissions,
+    lastMonthSubmissions,
+    activeCoupons,
+    lastMonthActiveCoupons,
+    totalRedemptions,
+  ] = await Promise.all([
+    prisma.ageVerification.count(),
+    prisma.ageVerification.count({
+      where: { verifiedAt: { gte: thisMonthStart } },
+    }),
+    prisma.ageVerification.count({
+      where: { verifiedAt: { gte: lastMonthStart, lte: lastMonthEnd } },
+    }),
+    prisma.contactSubmission.count(),
+    prisma.contactSubmission.count({
+      where: { submittedAt: { gte: thisMonthStart } },
+    }),
+    prisma.contactSubmission.count({
+      where: { submittedAt: { gte: lastMonthStart, lte: lastMonthEnd } },
+    }),
+    prisma.coupon.count({ where: { isActive: true } }),
+    prisma.coupon.count({
+      where: {
+        isActive: true,
+        createdAt: { lte: lastMonthEnd },
+      },
+    }),
+    prisma.couponRedemption.count(),
+  ])
+
+  // Calculate percentage changes
+  const visitorsChange =
+    lastMonthVerifications > 0
+      ? ((thisMonthVerifications - lastMonthVerifications) / lastMonthVerifications) * 100
+      : 0
+
+  const submissionsChange =
+    lastMonthSubmissions > 0
+      ? ((thisMonthSubmissions - lastMonthSubmissions) / lastMonthSubmissions) * 100
+      : 0
+
+  const couponsChange =
+    lastMonthActiveCoupons > 0
+      ? ((activeCoupons - lastMonthActiveCoupons) / lastMonthActiveCoupons) * 100
+      : 0
+
+  const visitorsTrend: 'up' | 'down' = visitorsChange >= 0 ? 'up' : 'down'
+  const submissionsTrend: 'up' | 'down' = submissionsChange >= 0 ? 'up' : 'down'
+  const couponsTrend: 'up' | 'down' = couponsChange >= 0 ? 'up' : 'down'
+
   const stats = [
     {
       title: 'Total Visitors',
-      value: '2,847',
-      change: 12.5,
+      value: totalVerifications.toLocaleString(),
+      change: Number(visitorsChange.toFixed(1)),
       icon: <Users className="w-6 h-6 text-emerald-600" />,
-      trend: 'up' as const,
+      trend: visitorsTrend,
     },
     {
       title: 'Contact Forms',
-      value: '142',
-      change: 8.2,
-      icon: <ShoppingCart className="w-6 h-6 text-emerald-600" />,
-      trend: 'up' as const,
+      value: totalSubmissions.toLocaleString(),
+      change: Number(submissionsChange.toFixed(1)),
+      icon: <Mail className="w-6 h-6 text-emerald-600" />,
+      trend: submissionsTrend,
     },
     {
       title: 'Active Coupons',
-      value: '8',
-      change: 3.1,
+      value: activeCoupons.toString(),
+      change: Number(couponsChange.toFixed(1)),
       icon: <Percent className="w-6 h-6 text-emerald-600" />,
-      trend: 'up' as const,
+      trend: couponsTrend,
     },
     {
-      title: 'Avg. Engagement',
-      value: '3.2 min',
-      change: -2.4,
-      icon: <DollarSign className="w-6 h-6 text-emerald-600" />,
-      trend: 'down' as const,
+      title: 'Total Redemptions',
+      value: totalRedemptions.toLocaleString(),
+      change: 0, // Will need historical data for accurate change
+      icon: <ShoppingCart className="w-6 h-6 text-emerald-600" />,
+      trend: 'up' as const,
     },
   ]
 

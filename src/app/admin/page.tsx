@@ -3,7 +3,7 @@ import { Card } from '@/app/components/ui/card'
 import { Mail, CheckCircle, Clock, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 import { DashboardStats } from '@/app/components/admin/dashboard-stats'
-import { VisitorTrendsChart, CouponPerformanceChart } from '@/app/components/admin/analytics-chart'
+import { AnalyticsChartsWrapper } from '@/app/components/admin/analytics-charts-wrapper'
 
 // Force dynamic rendering (requires database at runtime)
 export const dynamic = 'force-dynamic'
@@ -82,10 +82,7 @@ export default async function AdminDashboardPage() {
       <DashboardStats />
 
       {/* Analytics Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <VisitorTrendsChart />
-        <CouponPerformanceChart />
-      </div>
+      <AnalyticsChartsWrapper />
 
       {/* Contact Form Stats */}
       <div>
