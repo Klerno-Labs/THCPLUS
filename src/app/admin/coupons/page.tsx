@@ -18,7 +18,7 @@ import Link from 'next/link'
  */
 export default async function AdminCouponsPage() {
   return (
-    <div className="p-6 space-y-6">
+    <div className="pt-8 px-6 pb-6 space-y-6">
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
