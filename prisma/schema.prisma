@@ -115,3 +115,56 @@ model CouponRedemption {
   @@index([redeemedAt])
   @@map("coupon_redemptions")
 }
+
+/// Global application settings
+/// Stores configuration for Square integration, store info, notifications, social media, and SEO
+model Settings {
+  id String @id @default(cuid())
+
+  // Square Integration Settings
+  squareAccessToken         String?
+  squareLocationId          String?
+  squareEnvironment         String? // 'sandbox' | 'production'
+  squareWebhookSignatureKey String?
+  squareAutoSync            Boolean @default(false) // Auto-sync coupons to Square
+  squareSyncEnabled         Boolean @default(false) // Enable Square integration
+
+  // Store Information
+  storeName        String  @default("3rd Coast Smoke Company")
+  storePhone       String  @default("(555) 123-4567")
+  storeEmail       String  @default("info@3rdcoastsmokecompany.com")
+  storeAddress     String  @default("123 Main St, Houston, TX 77001")
+  storeHours       String  @default("{\"monday\":\"9:00 AM - 9:00 PM\",\"tuesday\":\"9:00 AM - 9:00 PM\",\"wednesday\":\"9:00 AM - 9:00 PM\",\"thursday\":\"9:00 AM - 9:00 PM\",\"friday\":\"9:00 AM - 10:00 PM\",\"saturday\":\"10:00 AM - 10:00 PM\",\"sunday\":\"10:00 AM - 8:00 PM\"}") @db.Text // JSON string
+  storeDescription String? @db.Text
+
+  // Email Notification Rules
+  notifyOnNewSubmission    Boolean @default(true) // Email when new contact form submitted
+  notifyOnCouponExpiry     Boolean @default(true) // Email when coupon is about to expire
+  notifyOnCouponUsageLimit Boolean @default(true) // Email when coupon reaches usage limit
+  notificationEmail        String  @default("admin@3rdcoastsmokecompany.com")
+  notificationCcEmails     String? // Comma-separated list of CC emails
+  dailyDigestEnabled       Boolean @default(false)
+  weeklyReportEnabled      Boolean @default(false)
+  couponExpiryWarningDays  Int     @default(7) // Days before expiry to send warning
+
+  // Social Media Links
+  facebookUrl  String?
+  instagramUrl String?
+  twitterUrl   String?
+  linkedinUrl  String?
+  youtubeUrl   String?
+  tiktokUrl    String?
+
+  // SEO Settings
+  seoMetaDescription String? @db.Text
+  seoKeywords        String? @db.Text // Comma-separated keywords
+  seoTitle           String? // Override default page title
+  ogImage            String? // Open Graph image URL
+  twitterHandle      String? // @username
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}

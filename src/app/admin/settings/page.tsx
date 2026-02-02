@@ -1,15 +1,33 @@
 import { auth } from '@/lib/auth'
 import { Card } from '@/app/components/ui/card'
-import { Settings as SettingsIcon, User, Bell, Shield } from 'lucide-react'
+import {
+  Settings as SettingsIcon,
+  Bell,
+  Shield,
+  Store,
+  CreditCard,
+  Share2,
+  Users,
+} from 'lucide-react'
 import { ChangePasswordForm } from '@/app/components/admin/change-password-form'
+import { SquareSettingsForm } from '@/app/components/admin/square-settings-form'
+import { StoreInfoForm } from '@/app/components/admin/store-info-form'
+import { EmailNotificationsForm } from '@/app/components/admin/email-notifications-form'
+import { SocialMediaSEOForm } from '@/app/components/admin/social-media-seo-form'
+import { getSettings } from '@/app/actions/settings'
+import { prisma } from '@/lib/db'
 
 /**
  * Admin Settings Page
  *
  * Manage admin account settings:
+ * - Square Integration
+ * - Store Information
+ * - Email Notifications
+ * - Social Media & SEO
  * - Account information
- * - Notification preferences
  * - Security settings
+ * - User Management
  * - System configuration
  */
 export default async function AdminSettingsPage() {
@@ -19,68 +37,181 @@ export default async function AdminSettingsPage() {
     return null
   }
 
+  // Fetch current settings
+  const settingsResult = await getSettings()
+  const settings = settingsResult.success ? settingsResult.data : null
+
+  // Fetch all admins for user management
+  const admins = await prisma.admin.findMany({
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      role: true,
+      isActive: true,
+      createdAt: true,
+      lastLoginAt: true,
+    },
+    orderBy: { createdAt: 'desc' },
+  })
+
   return (
     <div className="p-6 space-y-6">
       {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-        <p className="text-gray-600 mt-1">Manage your admin account and preferences.</p>
+        <p className="text-gray-600 mt-1">
+          Manage your store settings, integrations, and preferences.
+        </p>
       </div>
 
-      {/* Account Information */}
+      {/* Square Integration Settings */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-6">
-          <User className="w-6 h-6 text-primary-600" />
-          <h2 className="text-xl font-bold text-gray-900">Account Information</h2>
+          <CreditCard className="w-6 h-6 text-primary-600" />
+          <h2 className="text-xl font-bold text-gray-900">Square Integration</h2>
+        </div>
+        <p className="text-gray-600 mb-6">
+          Connect your Square POS to automatically sync coupons and track redemptions.
+        </p>
+        <SquareSettingsForm
+          initialData={
+            settings || {
+              squareAccessToken: null,
+              squareLocationId: null,
+              squareEnvironment: null,
+              squareWebhookSignatureKey: null,
+              squareAutoSync: false,
+              squareSyncEnabled: false,
+            }
+          }
+        />
+      </Card>
+
+      {/* Store Information */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-6">
+          <Store className="w-6 h-6 text-primary-600" />
+          <h2 className="text-xl font-bold text-gray-900">Store Information</h2>
+        </div>
+        <p className="text-gray-600 mb-6">
+          Update your store&apos;s basic information, hours, and contact details.
+        </p>
+        <StoreInfoForm
+          initialData={
+            settings || {
+              storeName: '3rd Coast Smoke Company',
+              storePhone: '(555) 123-4567',
+              storeEmail: 'info@3rdcoastsmokecompany.com',
+              storeAddress: '123 Main St, Houston, TX 77001',
+              storeHours:
+                '{"monday":"9:00 AM - 9:00 PM","tuesday":"9:00 AM - 9:00 PM","wednesday":"9:00 AM - 9:00 PM","thursday":"9:00 AM - 9:00 PM","friday":"9:00 AM - 10:00 PM","saturday":"10:00 AM - 10:00 PM","sunday":"10:00 AM - 8:00 PM"}',
+              storeDescription: null,
+            }
+          }
+        />
+      </Card>
+
+      {/* Email Notification Rules */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-6">
+          <Bell className="w-6 h-6 text-primary-600" />
+          <h2 className="text-xl font-bold text-gray-900">Email Notifications</h2>
+        </div>
+        <p className="text-gray-600 mb-6">
+          Configure when and where to receive email notifications.
+        </p>
+        <EmailNotificationsForm
+          initialData={
+            settings || {
+              notifyOnNewSubmission: true,
+              notifyOnCouponExpiry: true,
+              notifyOnCouponUsageLimit: true,
+              notificationEmail: 'admin@3rdcoastsmokecompany.com',
+              notificationCcEmails: null,
+              dailyDigestEnabled: false,
+              weeklyReportEnabled: false,
+              couponExpiryWarningDays: 7,
+            }
+          }
+        />
+      </Card>
+
+      {/* Social Media & SEO */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-6">
+          <Share2 className="w-6 h-6 text-primary-600" />
+          <h2 className="text-xl font-bold text-gray-900">Social Media & SEO</h2>
+        </div>
+        <p className="text-gray-600 mb-6">
+          Manage your social media links and search engine optimization settings.
+        </p>
+        <SocialMediaSEOForm
+          initialData={
+            settings || {
+              facebookUrl: null,
+              instagramUrl: null,
+              twitterUrl: null,
+              linkedinUrl: null,
+              youtubeUrl: null,
+              tiktokUrl: null,
+              seoMetaDescription: null,
+              seoKeywords: null,
+              seoTitle: null,
+              ogImage: null,
+              twitterHandle: null,
+            }
+          }
+        />
+      </Card>
+
+      {/* User Management */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-6">
+          <Users className="w-6 h-6 text-primary-600" />
+          <h2 className="text-xl font-bold text-gray-900">User Management</h2>
         </div>
 
         <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-              <div className="px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-900">
-                {session.user.name}
-              </div>
-            </div>
+          <p className="text-gray-600 mb-4">Manage admin users and their permissions.</p>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <div className="px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-900">
-                {session.user.email}
+          {/* Admin Users List */}
+          <div className="space-y-3">
+            {admins.map((admin) => (
+              <div
+                key={admin.id}
+                className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg border border-gray-200"
+              >
+                <div>
+                  <p className="font-medium text-gray-900">{admin.name}</p>
+                  <p className="text-sm text-gray-500">{admin.email}</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      admin.role === 'super_admin'
+                        ? 'bg-primary-100 text-primary-800'
+                        : 'bg-gray-100 text-gray-800'
+                    }`}
+                  >
+                    {admin.role.replace('_', ' ').toUpperCase()}
+                  </span>
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      admin.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    }`}
+                  >
+                    {admin.isActive ? 'Active' : 'Inactive'}
+                  </span>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
 
           <div className="pt-4">
             <p className="text-sm text-gray-500">
-              To update your account information, please contact a system administrator.
+              To add or remove admin users, contact a system administrator.
             </p>
-          </div>
-        </div>
-      </Card>
-
-      {/* Notification Settings */}
-      <Card className="p-6">
-        <div className="flex items-center gap-3 mb-6">
-          <Bell className="w-6 h-6 text-primary-600" />
-          <h2 className="text-xl font-bold text-gray-900">Notification Preferences</h2>
-        </div>
-
-        <div className="space-y-4">
-          <div className="flex items-center justify-between py-3 border-b border-gray-200">
-            <div>
-              <p className="font-medium text-gray-900">Email Notifications</p>
-              <p className="text-sm text-gray-500">Receive email alerts for new submissions</p>
-            </div>
-            <div className="text-sm font-medium text-gray-600">Coming soon</div>
-          </div>
-
-          <div className="flex items-center justify-between py-3">
-            <div>
-              <p className="font-medium text-gray-900">Weekly Reports</p>
-              <p className="text-sm text-gray-500">Weekly analytics and insights report</p>
-            </div>
-            <div className="text-sm font-medium text-gray-600">Coming soon</div>
           </div>
         </div>
       </Card>
