@@ -3,16 +3,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Twitter, User } from 'lucide-react'
-import { usePathname } from 'next/navigation'
 
 export function Footer() {
-  const pathname = usePathname()
-
-  // Don't render footer on admin routes
-  if (pathname?.startsWith('/admin')) {
-    return null
-  }
-
   return (
     <footer className="bg-primary text-white">
       <div className="container mx-auto px-4 py-12">

@@ -53,7 +53,7 @@ export function AdminNav() {
   }
 
   return (
-    <nav className="w-64 bg-white border-r border-gray-200 min-h-[calc(100vh-4rem)]">
+    <nav className="w-64 bg-white border-r border-gray-200 h-full">
       <div className="p-4 space-y-1">
         {navItems.map((item) => {
           const isActive = pathname === item.href
