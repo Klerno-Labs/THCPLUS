@@ -15,7 +15,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <Header />
 
       {/* Main content area with sidebar */}
-      <div className="flex flex-1 pt-20">
+      <div className="flex flex-1 pt-28">
         {/* Sidebar Navigation */}
         <AdminNav />
 
