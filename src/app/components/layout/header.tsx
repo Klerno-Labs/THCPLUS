@@ -6,8 +6,10 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Button } from '../ui/button'
+import { usePathname } from 'next/navigation'
 
 export function Header() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -25,6 +27,11 @@ export function Header() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  // Don't render header on admin routes
+  if (pathname?.startsWith('/admin')) {
+    return null
+  }
 
   return (
     <motion.header
