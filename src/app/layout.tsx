@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Space_Mono } from 'next/font/google'
 import './globals.css'
-import { Header } from './components/layout/header'
-import { Footer } from './components/layout/footer'
 import { Analytics } from './components/analytics'
 import { Toaster } from 'sonner'
 import { Providers } from './components/providers'
@@ -66,13 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LocalBusinessStructuredData />
         <Providers>
           <SmokeCursor enabled={false} color="rgba(147, 51, 234, 0.25)" throttle={80} />
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <main id="main-content" className="flex-grow">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          {children}
           <Analytics />
           <Toaster position="top-right" richColors closeButton />
         </Providers>
