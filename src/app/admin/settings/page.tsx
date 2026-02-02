@@ -75,14 +75,6 @@ export default async function AdminSettingsPage() {
             <div className="text-sm font-medium text-gray-600">Coming soon</div>
           </div>
 
-          <div className="flex items-center justify-between py-3 border-b border-gray-200">
-            <div>
-              <p className="font-medium text-gray-900">Daily Digest</p>
-              <p className="text-sm text-gray-500">Daily summary of submissions and activity</p>
-            </div>
-            <div className="text-sm font-medium text-gray-600">Coming soon</div>
-          </div>
-
           <div className="flex items-center justify-between py-3">
             <div>
               <p className="font-medium text-gray-900">Weekly Reports</p>
@@ -112,18 +104,10 @@ export default async function AdminSettingsPage() {
 
           {/* Future Features */}
           <div className="border-t pt-6 space-y-4">
-            <div className="flex items-center justify-between py-3 border-b border-gray-200">
+            <div className="flex items-center justify-between py-3">
               <div>
                 <p className="font-medium text-gray-900">Two-Factor Authentication</p>
                 <p className="text-sm text-gray-500">Add an extra layer of security</p>
-              </div>
-              <div className="text-sm font-medium text-gray-600">Coming soon</div>
-            </div>
-
-            <div className="flex items-center justify-between py-3">
-              <div>
-                <p className="font-medium text-gray-900">Login History</p>
-                <p className="text-sm text-gray-500">View recent login activity</p>
               </div>
               <div className="text-sm font-medium text-gray-600">Coming soon</div>
             </div>
