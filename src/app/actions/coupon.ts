@@ -4,6 +4,7 @@ import { prisma } from '@/lib/db'
 import { requireAuth } from '@/lib/auth'
 import { z } from 'zod'
 import type { ApiResponse } from '@/types'
+import { createSquareDiscount, isSquareConfigured, getSquareDiscountUsage } from '@/lib/square'
 
 /**
  * Coupon validation schema
@@ -19,7 +20,10 @@ const validateCouponSchema = z.object({
  * Coupon creation schema
  */
 const createCouponSchema = z.object({
-  code: z.string().min(3, 'Code must be at least 3 characters').regex(/^[A-Z0-9]+$/, 'Code must be uppercase letters and numbers only'),
+  code: z
+    .string()
+    .min(3, 'Code must be at least 3 characters')
+    .regex(/^[A-Z0-9]+$/, 'Code must be uppercase letters and numbers only'),
   description: z.string().min(1, 'Description is required'),
   type: z.enum(['percentage', 'fixed']),
   value: z.number().positive('Value must be positive'),
@@ -272,6 +276,32 @@ export async function createCoupon(data: CreateCouponData): Promise<ApiResponse<
       }
     }
 
+    // Try to create discount in Square if configured
+    let squareDiscountId: string | undefined
+    let squareVersion: number | undefined
+    let squareSynced = false
+
+    if (isSquareConfigured()) {
+      try {
+        const squareResult = await createSquareDiscount({
+          code: validatedData.code.toUpperCase(),
+          description: validatedData.description,
+          type: validatedData.type,
+          value: validatedData.value,
+          minPurchase: validatedData.minPurchase,
+          startsAt: new Date(validatedData.startsAt),
+          expiresAt: validatedData.expiresAt ? new Date(validatedData.expiresAt) : undefined,
+        })
+
+        squareDiscountId = squareResult.discountId
+        squareVersion = squareResult.version
+        squareSynced = true
+      } catch (error) {
+        console.error('Failed to create Square discount:', error)
+        // Continue creating the coupon even if Square sync fails
+      }
+    }
+
     await prisma.coupon.create({
       data: {
         code: validatedData.code.toUpperCase(),
@@ -284,18 +314,151 @@ export async function createCoupon(data: CreateCouponData): Promise<ApiResponse<
         startsAt: new Date(validatedData.startsAt),
         expiresAt: validatedData.expiresAt ? new Date(validatedData.expiresAt) : undefined,
         createdBy: 'admin', // TODO: Get from session
+        squareDiscountId,
+        squareVersion,
+        squareSynced,
+        squareSyncedAt: squareSynced ? new Date() : undefined,
       },
     })
 
     return {
       success: true,
-      message: 'Coupon created successfully',
+      message: squareSynced
+        ? 'Coupon created and synced to Square successfully'
+        : 'Coupon created successfully (Square sync unavailable)',
     }
   } catch (error) {
     console.error('Coupon creation error:', error)
     return {
       success: false,
       error: 'An error occurred while creating the coupon',
+    }
+  }
+}
+
+/**
+ * Sync coupon usage from Square
+ * Updates the usesCount from Square orders
+ */
+export async function syncCouponUsageFromSquare(
+  couponId: string
+): Promise<ApiResponse<{ usageCount: number }>> {
+  try {
+    await requireAuth()
+
+    const coupon = await prisma.coupon.findUnique({
+      where: { id: couponId },
+    })
+
+    if (!coupon) {
+      return {
+        success: false,
+        error: 'Coupon not found',
+      }
+    }
+
+    if (!coupon.squareDiscountId) {
+      return {
+        success: false,
+        error: 'Coupon is not synced with Square',
+      }
+    }
+
+    if (!isSquareConfigured()) {
+      return {
+        success: false,
+        error: 'Square is not configured',
+      }
+    }
+
+    try {
+      const usageCount = await getSquareDiscountUsage(coupon.squareDiscountId)
+
+      // Update the coupon's usage count
+      await prisma.coupon.update({
+        where: { id: couponId },
+        data: {
+          usesCount: usageCount,
+          squareSyncedAt: new Date(),
+        },
+      })
+
+      return {
+        success: true,
+        data: { usageCount },
+        message: `Synced ${usageCount} redemptions from Square`,
+      }
+    } catch (error) {
+      console.error('Error syncing from Square:', error)
+      return {
+        success: false,
+        error: 'Failed to sync usage from Square',
+      }
+    }
+  } catch (error) {
+    console.error('Sync coupon usage error:', error)
+    return {
+      success: false,
+      error: 'An error occurred while syncing coupon usage',
+    }
+  }
+}
+
+/**
+ * Sync all Square-linked coupons
+ * Updates usage counts for all coupons that have Square IDs
+ */
+export async function syncAllCouponsFromSquare(): Promise<ApiResponse<{ syncedCount: number }>> {
+  try {
+    await requireAuth()
+
+    if (!isSquareConfigured()) {
+      return {
+        success: false,
+        error: 'Square is not configured',
+      }
+    }
+
+    // Get all coupons with Square IDs
+    const coupons = await prisma.coupon.findMany({
+      where: {
+        squareDiscountId: { not: null },
+      },
+    })
+
+    let syncedCount = 0
+
+    for (const coupon of coupons) {
+      if (!coupon.squareDiscountId) continue
+
+      try {
+        const usageCount = await getSquareDiscountUsage(coupon.squareDiscountId)
+
+        await prisma.coupon.update({
+          where: { id: coupon.id },
+          data: {
+            usesCount: usageCount,
+            squareSyncedAt: new Date(),
+          },
+        })
+
+        syncedCount++
+      } catch (error) {
+        console.error(`Error syncing coupon ${coupon.code}:`, error)
+        // Continue with other coupons
+      }
+    }
+
+    return {
+      success: true,
+      data: { syncedCount },
+      message: `Synced ${syncedCount} coupons from Square`,
+    }
+  } catch (error) {
+    console.error('Sync all coupons error:', error)
+    return {
+      success: false,
+      error: 'An error occurred while syncing coupons',
     }
   }
 }

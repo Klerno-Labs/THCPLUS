@@ -84,11 +84,18 @@ model Coupon {
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 
+  // Square integration fields
+  squareDiscountId String? // Square Discount ID for syncing
+  squareSynced     Boolean   @default(false) // Whether synced to Square
+  squareSyncedAt   DateTime? // Last sync time
+  squareVersion    Int? // Square object version for updates
+
   redemptions CouponRedemption[]
 
   @@index([code])
   @@index([isActive])
   @@index([expiresAt])
+  @@index([squareDiscountId])
   @@map("coupons")
 }
 
