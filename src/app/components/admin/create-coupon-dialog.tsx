@@ -57,7 +57,8 @@ export function CreateCouponDialog({ children }: CreateCouponDialogProps) {
     reset,
     setValue,
   } = useForm<CreateCouponFormData>({
-    resolver: zodResolver(createCouponSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(createCouponSchema) as any,
     defaultValues: {
       type: 'percentage',
       startsAt: new Date().toISOString().split('T')[0],
@@ -80,9 +81,7 @@ export function CreateCouponDialog({ children }: CreateCouponDialogProps) {
         value: Number(data.value),
         minPurchase: data.minPurchase ? Number(data.minPurchase) : undefined,
         maxUses: data.maxUses ? Number(data.maxUses) : undefined,
-        maxUsesPerCustomer: data.maxUsesPerCustomer
-          ? Number(data.maxUsesPerCustomer)
-          : undefined,
+        maxUsesPerCustomer: data.maxUsesPerCustomer ? Number(data.maxUsesPerCustomer) : undefined,
         startsAt: data.startsAt,
         expiresAt: data.expiresAt || undefined,
       })
@@ -288,11 +287,7 @@ export function CreateCouponDialog({ children }: CreateCouponDialogProps) {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Max Uses Per Customer
                   </label>
-                  <Input
-                    type="number"
-                    {...register('maxUsesPerCustomer')}
-                    placeholder="1"
-                  />
+                  <Input type="number" {...register('maxUsesPerCustomer')} placeholder="1" />
                   <p className="text-xs text-gray-500 mt-1">
                     Optional. Leave blank for unlimited per customer.
                   </p>

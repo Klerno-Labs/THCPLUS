@@ -8,7 +8,7 @@ import { Button } from '@/app/components/ui/button'
 import { Input } from '@/app/components/ui/input'
 import { Card } from '@/app/components/ui/card'
 import { validateCoupon, redeemCoupon } from '@/app/actions/coupon'
-import {  CheckCircle, XCircle, AlertCircle, Loader2 } from 'lucide-react'
+import { CheckCircle, XCircle, AlertCircle, Loader2 } from 'lucide-react'
 
 interface TestCouponFormData {
   code: string
@@ -49,7 +49,8 @@ export function TestCouponForm() {
     formState: { errors },
     watch,
   } = useForm<TestCouponFormData>({
-    resolver: zodResolver(testCouponSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(testCouponSchema) as any,
   })
 
   const orderTotal = watch('orderTotal')
@@ -117,25 +118,19 @@ export function TestCouponForm() {
       <form className="space-y-4">
         {/* Coupon Code */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Coupon Code *
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Coupon Code *</label>
           <Input
             type="text"
             {...register('code')}
             placeholder="Enter coupon code (e.g., WINTER20)"
             className="font-mono uppercase"
           />
-          {errors.code && (
-            <p className="text-red-500 text-sm mt-1">{errors.code.message}</p>
-          )}
+          {errors.code && <p className="text-red-500 text-sm mt-1">{errors.code.message}</p>}
         </div>
 
         {/* Order Total */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Order Total *
-          </label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Order Total *</label>
           <div className="relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
             <Input
@@ -156,17 +151,11 @@ export function TestCouponForm() {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Customer Email (Optional)
           </label>
-          <Input
-            type="email"
-            {...register('customerEmail')}
-            placeholder="customer@example.com"
-          />
+          <Input type="email" {...register('customerEmail')} placeholder="customer@example.com" />
           {errors.customerEmail && (
             <p className="text-red-500 text-sm mt-1">{errors.customerEmail.message}</p>
           )}
-          <p className="text-xs text-gray-500 mt-1">
-            Used to check per-customer usage limits
-          </p>
+          <p className="text-xs text-gray-500 mt-1">Used to check per-customer usage limits</p>
         </div>
 
         {/* Customer Phone (Optional) */}
@@ -174,11 +163,7 @@ export function TestCouponForm() {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Customer Phone (Optional)
           </label>
-          <Input
-            type="tel"
-            {...register('customerPhone')}
-            placeholder="(555) 123-4567"
-          />
+          <Input type="tel" {...register('customerPhone')} placeholder="(555) 123-4567" />
           <p className="text-xs text-gray-500 mt-1">For tracking purposes</p>
         </div>
 
@@ -242,11 +227,7 @@ export function TestCouponForm() {
             <div className="flex-1">
               <h3
                 className={`font-bold mb-2 ${
-                  error
-                    ? 'text-red-900'
-                    : result?.isValid
-                      ? 'text-emerald-900'
-                      : 'text-yellow-900'
+                  error ? 'text-red-900' : result?.isValid ? 'text-emerald-900' : 'text-yellow-900'
                 }`}
               >
                 {error ? 'Validation Failed' : result?.isValid ? 'Valid Coupon!' : 'Invalid'}
