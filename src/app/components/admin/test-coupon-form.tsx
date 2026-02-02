@@ -10,14 +10,19 @@ import { Card } from '@/app/components/ui/card'
 import { validateCoupon, redeemCoupon } from '@/app/actions/coupon'
 import {  CheckCircle, XCircle, AlertCircle, Loader2 } from 'lucide-react'
 
+interface TestCouponFormData {
+  code: string
+  orderTotal: number
+  customerEmail?: string
+  customerPhone?: string
+}
+
 const testCouponSchema = z.object({
   code: z.string().min(1, 'Coupon code is required'),
   orderTotal: z.coerce.number().min(0.01, 'Order total must be greater than 0'),
   customerEmail: z.string().email('Invalid email').optional().or(z.literal('')),
   customerPhone: z.string().optional(),
 })
-
-type TestCouponFormData = z.infer<typeof testCouponSchema>
 
 type ValidationResult = {
   isValid: boolean

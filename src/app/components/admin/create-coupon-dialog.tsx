@@ -12,6 +12,18 @@ import { createCoupon } from '@/app/actions/coupon'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 
+interface CreateCouponFormData {
+  code: string
+  description: string
+  type: 'percentage' | 'fixed'
+  value: number | ''
+  minPurchase?: number | ''
+  maxUses?: number | ''
+  maxUsesPerCustomer?: number | ''
+  startsAt: string
+  expiresAt?: string
+}
+
 const createCouponSchema = z.object({
   code: z
     .string()
@@ -27,8 +39,6 @@ const createCouponSchema = z.object({
   startsAt: z.string().min(1, 'Start date is required'),
   expiresAt: z.string().optional().or(z.literal('')),
 })
-
-type CreateCouponFormData = z.infer<typeof createCouponSchema>
 
 interface CreateCouponDialogProps {
   children: React.ReactNode
