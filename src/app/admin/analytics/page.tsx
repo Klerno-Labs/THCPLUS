@@ -81,6 +81,15 @@ export default async function AdminAnalyticsPage() {
     ORDER BY date DESC
   `
 
+  // Fetch status breakdown counts
+  const [statusNewCount, statusReadCount, statusRepliedCount, ageVerificationsToday] =
+    await Promise.all([
+      prisma.contactSubmission.count({ where: { status: 'new' } }),
+      prisma.contactSubmission.count({ where: { status: 'read' } }),
+      prisma.contactSubmission.count({ where: { status: 'replied' } }),
+      prisma.ageVerification.count({ where: { verifiedAt: { gte: today } } }),
+    ])
+
   const stats = [
     {
       name: 'Total Submissions',
@@ -117,7 +126,7 @@ export default async function AdminAnalyticsPage() {
   ]
 
   return (
-    <div className="pt-24 pb-12 px-4 md:px-6 space-y-6">
+    <div className="p-6 space-y-6">
       {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Analytics</h1>
@@ -185,17 +194,17 @@ export default async function AdminAnalyticsPage() {
             {[
               {
                 label: 'New (Unread)',
-                count: await prisma.contactSubmission.count({ where: { status: 'new' } }),
+                count: statusNewCount,
                 color: 'bg-yellow-500',
               },
               {
                 label: 'Read',
-                count: await prisma.contactSubmission.count({ where: { status: 'read' } }),
+                count: statusReadCount,
                 color: 'bg-gray-500',
               },
               {
                 label: 'Replied',
-                count: await prisma.contactSubmission.count({ where: { status: 'replied' } }),
+                count: statusRepliedCount,
                 color: 'bg-green-500',
               },
             ].map((item) => (
@@ -223,9 +232,7 @@ export default async function AdminAnalyticsPage() {
             </div>
             <div className="flex items-center justify-between text-sm">
               <span className="text-gray-600">Age verifications today</span>
-              <span className="font-semibold text-gray-900">
-                {await prisma.ageVerification.count({ where: { verifiedAt: { gte: today } } })}
-              </span>
+              <span className="font-semibold text-gray-900">{ageVerificationsToday}</span>
             </div>
           </div>
         </Card>
