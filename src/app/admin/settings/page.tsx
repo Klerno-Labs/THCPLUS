@@ -14,6 +14,7 @@ import { SquareSettingsForm } from '@/app/components/admin/square-settings-form'
 import { StoreInfoForm } from '@/app/components/admin/store-info-form'
 import { EmailNotificationsForm } from '@/app/components/admin/email-notifications-form'
 import { SocialMediaSEOForm } from '@/app/components/admin/social-media-seo-form'
+import { UserManagement } from '@/app/components/admin/user-management'
 import { getSettings } from '@/app/actions/settings'
 import { prisma } from '@/lib/db'
 
@@ -41,8 +42,22 @@ export default async function AdminSettingsPage() {
   const settingsResult = await getSettings()
   const settings = settingsResult.success ? settingsResult.data : null
 
+  // Fetch current user's full info (including role)
+  const currentUser = await prisma.admin.findUnique({
+    where: { email: session.user.email },
+    select: {
+      id: true,
+      email: true,
+      role: true,
+    },
+  })
+
+  if (!currentUser) {
+    return null
+  }
+
   // Fetch all admins for user management
-  const admins = await prisma.admin.findMany({
+  const admins = (await prisma.admin.findMany({
     select: {
       id: true,
       email: true,
@@ -53,7 +68,15 @@ export default async function AdminSettingsPage() {
       lastLoginAt: true,
     },
     orderBy: { createdAt: 'desc' },
-  })
+  })) as Array<{
+    id: string
+    email: string
+    name: string
+    role: 'admin' | 'super_admin'
+    isActive: boolean
+    createdAt: Date
+    lastLoginAt: Date | null
+  }>
 
   return (
     <div className="p-6 space-y-6">
@@ -172,48 +195,11 @@ export default async function AdminSettingsPage() {
           <h2 className="text-xl font-bold text-gray-900">User Management</h2>
         </div>
 
-        <div className="space-y-4">
-          <p className="text-gray-600 mb-4">Manage admin users and their permissions.</p>
-
-          {/* Admin Users List */}
-          <div className="space-y-3">
-            {admins.map((admin) => (
-              <div
-                key={admin.id}
-                className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg border border-gray-200"
-              >
-                <div>
-                  <p className="font-medium text-gray-900">{admin.name}</p>
-                  <p className="text-sm text-gray-500">{admin.email}</p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      admin.role === 'super_admin'
-                        ? 'bg-primary-100 text-primary-800'
-                        : 'bg-gray-100 text-gray-800'
-                    }`}
-                  >
-                    {admin.role.replace('_', ' ').toUpperCase()}
-                  </span>
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      admin.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                    }`}
-                  >
-                    {admin.isActive ? 'Active' : 'Inactive'}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="pt-4">
-            <p className="text-sm text-gray-500">
-              To add or remove admin users, contact a system administrator.
-            </p>
-          </div>
-        </div>
+        <UserManagement
+          initialUsers={admins}
+          currentUserEmail={currentUser.email}
+          currentUserRole={currentUser.role as 'admin' | 'super_admin'}
+        />
       </Card>
 
       {/* Security Settings - Change Password */}
