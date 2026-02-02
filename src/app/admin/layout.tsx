@@ -1,4 +1,4 @@
-import { AdminNav } from '@/app/components/admin/admin-nav'
+import { ConditionalAdminNav } from '@/app/components/admin/conditional-admin-nav'
 import { Header } from '@/app/components/layout/header'
 import { Footer } from '@/app/components/layout/footer'
 
@@ -7,6 +7,7 @@ import { Footer } from '@/app/components/layout/footer'
  *
  * Provides consistent layout with header, sidebar navigation, and footer for all admin pages.
  * Authentication is handled by individual pages.
+ * Navigation is hidden on the login page.
  */
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -16,8 +17,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Main content area with sidebar */}
       <div className="flex flex-1 pt-28">
-        {/* Sidebar Navigation */}
-        <AdminNav />
+        {/* Sidebar Navigation - Hidden on login page */}
+        <ConditionalAdminNav />
 
         {/* Main Content */}
         <main className="flex-1 overflow-auto bg-gray-50">{children}</main>
