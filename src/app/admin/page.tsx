@@ -71,7 +71,7 @@ export default async function AdminDashboardPage() {
   ]
 
   return (
-    <div className="pt-24 pb-12 px-4 md:px-6 space-y-6">
+    <div className="p-6 space-y-6">
       {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>

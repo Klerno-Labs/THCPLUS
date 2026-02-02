@@ -18,7 +18,7 @@ import Link from 'next/link'
  */
 export default async function AdminCouponsPage() {
   return (
-    <div className="space-y-6">
+    <div className="p-6 space-y-6">
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -29,9 +29,7 @@ export default async function AdminCouponsPage() {
         </div>
         <div className="flex gap-3">
           <Link href="/admin/coupons/test">
-            <Button variant="outline">
-              Test Coupons
-            </Button>
+            <Button variant="outline">Test Coupons</Button>
           </Link>
           <CreateCouponDialog>
             <Button className="bg-emerald-600 hover:bg-emerald-700">
