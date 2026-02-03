@@ -6,18 +6,6 @@ import { FlaskConical, Scale, BookOpen, Leaf, AlertCircle, CheckCircle, Info } f
 
 const cannabinoids = [
   {
-    name: 'Delta-8 THC',
-    description:
-      'A naturally occurring cannabinoid with milder psychoactive effects than Delta-9 THC. Known for providing a clear-headed, relaxing experience.',
-    effects: ['Relaxation', 'Mild euphoria', 'Appetite stimulation', 'Pain relief'],
-  },
-  {
-    name: 'Delta-9 THC',
-    description:
-      'The primary psychoactive compound in cannabis. Hemp-derived Delta-9 products are legal when containing less than 0.3% by dry weight.',
-    effects: ['Euphoria', 'Relaxation', 'Altered perception', 'Increased appetite'],
-  },
-  {
     name: 'THCA',
     description:
       'The acidic precursor to THC. Non-psychoactive in its raw form but converts to THC when heated (decarboxylation).',
@@ -171,15 +159,14 @@ export default function EducationPage() {
                 <CardContent>
                   <p className="text-gray-600 mb-4">
                     The Agriculture Improvement Act of 2018 (2018 Farm Bill) federally legalized
-                    hemp and hemp-derived products containing less than 0.3% Delta-9 THC by dry
-                    weight. This landmark legislation removed hemp from the Controlled Substances
-                    Act and opened the door for legal hemp production and sales across the United
-                    States.
+                    hemp and hemp-derived products containing less than 0.3% THC by dry weight. This
+                    landmark legislation removed hemp from the Controlled Substances Act and opened
+                    the door for legal hemp production and sales across the United States.
                   </p>
                   <p className="text-gray-600">
-                    Under this law, hemp-derived cannabinoids like Delta-8 THC, HHC, and THCA are
-                    federally legal as long as they come from compliant hemp plants. However, state
-                    laws may vary, so it&apos;s important to understand your local regulations.
+                    Under this law, hemp-derived cannabinoids like HHC, THCA, and CBD are federally
+                    legal as long as they come from compliant hemp plants. However, state laws may
+                    vary, so it&apos;s important to understand your local regulations.
                   </p>
                 </CardContent>
               </Card>
@@ -199,7 +186,7 @@ export default function EducationPage() {
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex items-start">
                       <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      Hemp-derived products with less than 0.3% Delta-9 THC are legal
+                      Hemp-derived products with less than 0.3% THC are legal
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />

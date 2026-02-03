@@ -13,7 +13,7 @@ export function LocalBusinessStructuredData() {
     '@type': 'TobaccoStore',
     name: '3rd Coast Smoke Company',
     description:
-      'Premium hemp products store in Houston, TX. Offering Delta-8, CBD, THCA, HHC, and other high-quality hemp products with lab testing and expert guidance.',
+      'Premium hemp products store in Houston, TX. Offering CBD, THCA, HHC, and other high-quality hemp products with lab testing and expert guidance.',
     image: 'https://thcplus.com/og-image.png',
     '@id': 'https://thcplus.com',
     url: 'https://thcplus.com',
@@ -73,14 +73,6 @@ export function FAQStructuredData() {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'What is Delta-8 THC?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Delta-8 THC is a cannabinoid found in hemp plants. It offers mild psychoactive effects that are generally less intense than Delta-9 THC, providing a more relaxed experience.',
-        },
-      },
       {
         '@type': 'Question',
         name: 'Are your products lab tested?',

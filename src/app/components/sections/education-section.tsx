@@ -10,7 +10,7 @@ const topics = [
   {
     icon: FlaskConical,
     title: 'Cannabinoid Guide',
-    description: 'Learn about Delta-8, Delta-9, HHC, THCA, and other hemp-derived cannabinoids.',
+    description: 'Learn about HHC, THCA, CBD, and other hemp-derived cannabinoids.',
     link: '/education#cannabinoids',
   },
   {

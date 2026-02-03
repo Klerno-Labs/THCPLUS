@@ -10,23 +10,6 @@ import { Product } from '@/types/product'
 export const products: Product[] = [
   // Vapes
   {
-    id: 'vape-001',
-    name: 'Delta-8 Disposable Vape - Berry Blast',
-    description:
-      'Premium Delta-8 THC disposable vape pen with natural berry flavoring. Lab-tested for purity and potency. 2g capacity.',
-    category: 'vapes',
-    price: 29.99,
-    image: '/images/products/placeholder.svg',
-    inStock: true,
-    featured: true,
-    cannabinoids: ['Delta-8'],
-    thcContent: '95% Delta-8 THC',
-    labTested: true,
-    flavors: ['Berry', 'Sweet'],
-    brand: 'Premium Vapes',
-    size: '2g',
-  },
-  {
     id: 'vape-002',
     name: 'THCA Live Resin Vape',
     description:
@@ -61,23 +44,6 @@ export const products: Product[] = [
   },
 
   // Edibles
-  {
-    id: 'edible-001',
-    name: 'Delta-9 Gummies - Mixed Fruit',
-    description:
-      'Delicious Delta-9 THC gummies in assorted fruit flavors. 25mg per gummy, 10 pieces per pack.',
-    category: 'edibles',
-    price: 24.99,
-    image: '/images/products/placeholder.svg',
-    inStock: true,
-    featured: true,
-    cannabinoids: ['Delta-9'],
-    thcContent: '25mg per piece',
-    labTested: true,
-    flavors: ['Mixed Fruit'],
-    brand: 'Tasty Treats',
-    size: '250mg total',
-  },
   {
     id: 'edible-002',
     name: 'CBD Gummies - Sleep Formula',
@@ -133,14 +99,14 @@ export const products: Product[] = [
     id: 'flower-002',
     name: 'CBD Flower - Lifter',
     description:
-      'High-CBD hemp flower with less than 0.3% Delta-9 THC. Perfect for relaxation without intoxication.',
+      'High-CBD hemp flower with less than 0.3% THC. Perfect for relaxation without intoxication.',
     category: 'flower',
     price: 29.99,
     image: '/images/products/placeholder.svg',
     inStock: true,
     cannabinoids: ['CBD'],
     cbdContent: '18% CBD',
-    thcContent: '<0.3% Delta-9',
+    thcContent: '<0.3% THC',
     labTested: true,
     strainType: 'Hybrid',
     brand: 'CBD Flower Co',
@@ -164,22 +130,6 @@ export const products: Product[] = [
   },
 
   // Concentrates
-  {
-    id: 'concentrate-001',
-    name: 'Delta-8 Wax - Blue Dream',
-    description:
-      'Potent Delta-8 THC wax with Blue Dream terpene profile. For use with dab rigs or concentrate pens.',
-    category: 'concentrates',
-    price: 34.99,
-    image: '/images/products/placeholder.svg',
-    inStock: true,
-    cannabinoids: ['Delta-8'],
-    thcContent: '95% Delta-8',
-    labTested: true,
-    strainType: 'Hybrid',
-    brand: 'Concentrate Kings',
-    size: '1g',
-  },
   {
     id: 'concentrate-002',
     name: 'Live Resin - Sour Diesel',
@@ -244,22 +194,6 @@ export const products: Product[] = [
     brand: 'Pure Tinctures',
     size: '30ml',
   },
-  {
-    id: 'tincture-002',
-    name: 'Delta-8 Tincture - 500mg',
-    description:
-      'Delta-8 THC tincture for precise dosing. Great for microdosing and controlled effects.',
-    category: 'tinctures',
-    price: 39.99,
-    image: '/images/products/placeholder.svg',
-    inStock: true,
-    cannabinoids: ['Delta-8'],
-    thcContent: '500mg Delta-8',
-    labTested: true,
-    brand: 'Pure Tinctures',
-    size: '30ml',
-  },
-
   // Accessories
   {
     id: 'accessory-001',

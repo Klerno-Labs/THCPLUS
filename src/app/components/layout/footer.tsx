@@ -152,14 +152,14 @@ export function Footer() {
           <p className="text-gray-500 text-xs mt-4 max-w-4xl mx-auto leading-relaxed">
             Must be 21 or over to purchase these products or visit locations. This product contains
             industrial (Lab Tested) hemp (Hemp Flower) that was grown pursuant to state and federal
-            law (Containing not more than 0.3% delta-9 THC on a dry weight basis) by licensed
-            farmers in accordance with the industrial Hemp provisions of the Agricultural Act of
-            2014 (known as the &quot;Farm Act&quot;) and its state law counterparts thus it is not
-            subject to regulation, or control, under the Federal Controlled Substances Act. The FDA
-            has not evaluated this product and these statements for safety or efficacy. As with any
-            new product, consult your physician before consuming this product. Do not consume if
-            pregnant or breastfeeding. This hemp-derived product may contain trace amounts of
-            Delta-9 THC in accordance with the 2018 Farm Bill.
+            law (Containing not more than 0.3% THC on a dry weight basis) by licensed farmers in
+            accordance with the industrial Hemp provisions of the Agricultural Act of 2014 (known as
+            the &quot;Farm Act&quot;) and its state law counterparts thus it is not subject to
+            regulation, or control, under the Federal Controlled Substances Act. The FDA has not
+            evaluated this product and these statements for safety or efficacy. As with any new
+            product, consult your physician before consuming this product. Do not consume if
+            pregnant or breastfeeding. This hemp-derived product may contain trace amounts of THC in
+            accordance with the 2018 Farm Bill.
           </p>
         </div>
       </div>

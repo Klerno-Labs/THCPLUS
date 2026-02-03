@@ -25,8 +25,7 @@ const features = [
   {
     icon: Leaf,
     title: 'Farm Bill Compliant',
-    description:
-      'All products contain less than 0.3% Delta-9 THC, fully compliant with federal law.',
+    description: 'All products contain less than 0.3% THC, fully compliant with federal law.',
   },
 ]
 

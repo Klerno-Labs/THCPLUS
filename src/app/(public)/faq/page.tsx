@@ -7,11 +7,6 @@ import { Card, CardContent } from '@/app/components/ui/card'
 
 const faqs = [
   {
-    question: 'What is Delta-8 THC?',
-    answer:
-      'Delta-8 THC is a cannabinoid found in hemp plants. It offers mild psychoactive effects that are generally less intense than Delta-9 THC, providing a more relaxed experience. Delta-8 is federally legal under the 2018 Farm Bill when derived from hemp containing less than 0.3% Delta-9 THC.',
-  },
-  {
     question: 'Are your products lab tested?',
     answer:
       'Yes, all our products undergo rigorous third-party lab testing to ensure purity, potency, and safety. Lab reports verify the cannabinoid content and check for harmful contaminants like heavy metals, pesticides, and residual solvents. Lab reports are available upon request for any product we carry.',
@@ -29,12 +24,7 @@ const faqs = [
   {
     question: 'What types of products do you carry?',
     answer:
-      'We offer a wide range of hemp-derived products including Delta-8 THC, Delta-9 THC (hemp-derived), THCA, HHC, CBD, kratom, vape products, edibles, tinctures, topicals, and premium glass pipes and accessories. All products are sourced from reputable manufacturers and undergo lab testing.',
-  },
-  {
-    question: 'Is Delta-8 legal in Texas?',
-    answer:
-      'Yes, Delta-8 THC derived from hemp is currently legal in Texas under both federal and state law, provided it contains less than 0.3% Delta-9 THC on a dry weight basis. However, laws can change, so we recommend staying informed about current regulations.',
+      'We offer a wide range of hemp-derived products including THCA, HHC, CBD, kratom, vape products, edibles, tinctures, topicals, and premium glass pipes and accessories. All products are sourced from reputable manufacturers and undergo lab testing.',
   },
   {
     question: 'Do you offer delivery or online ordering?',

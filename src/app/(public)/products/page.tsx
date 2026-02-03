@@ -26,7 +26,7 @@ const categories: { value: ProductCategory | 'all'; label: string }[] = [
   { value: 'accessories', label: 'Accessories' },
 ]
 
-const cannabinoids: CannabinoIDType[] = ['Delta-8', 'Delta-9', 'THCA', 'HHC', 'CBD', 'CBN']
+const cannabinoids: CannabinoIDType[] = ['THCA', 'HHC', 'CBD', 'CBN']
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory | 'all'>('all')

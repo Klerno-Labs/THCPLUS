@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   description:
     '3rd Coast Smoke Company offers high-quality, lab-tested hemp products in Houston, TX. Visit us at 8302 N Eldridge Pkwy for a premium shopping experience with expert guidance.',
   keywords:
-    'smoke shop, hemp products, Houston, TX, 3rd Coast Smoke Company, Delta-8, CBD, THCA, HHC, vape, kratom, glass pipes',
+    'smoke shop, hemp products, Houston, TX, 3rd Coast Smoke Company, CBD, THCA, HHC, vape, kratom, glass pipes',
   authors: [{ name: '3rd Coast Smoke Company' }],
   creator: '3rd Coast Smoke Company',
   publisher: '3rd Coast Smoke Company',

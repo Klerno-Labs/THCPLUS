@@ -14,16 +14,7 @@ export type ProductCategory =
   | 'tinctures'
   | 'topicals'
 
-export type CannabinoIDType =
-  | 'Delta-8'
-  | 'Delta-9'
-  | 'Delta-10'
-  | 'THCA'
-  | 'THCP'
-  | 'HHC'
-  | 'CBD'
-  | 'CBG'
-  | 'CBN'
+export type CannabinoIDType = 'Delta-10' | 'THCA' | 'THCP' | 'HHC' | 'CBD' | 'CBG' | 'CBN'
 
 export interface Product {
   id: string
