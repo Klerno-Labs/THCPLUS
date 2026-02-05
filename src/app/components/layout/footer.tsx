@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Twitter, User } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Instagram, User } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -113,24 +113,6 @@ export function Footer() {
                 aria-label="Follow us on Instagram"
               >
                 <Instagram className="h-6 w-6" aria-hidden="true" />
-              </a>
-              <a
-                href="https://www.facebook.com/3rdcoastsmokecompany/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-secondary transition-colors"
-                aria-label="Follow us on Facebook"
-              >
-                <Facebook className="h-6 w-6" aria-hidden="true" />
-              </a>
-              <a
-                href="https://twitter.com/3rdcoastsmoke"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-secondary transition-colors"
-                aria-label="Follow us on Twitter"
-              >
-                <Twitter className="h-6 w-6" aria-hidden="true" />
               </a>
             </div>
           </div>
