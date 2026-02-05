@@ -141,7 +141,7 @@ export const products: Product[] = [
       'Exotic hybrid with sweet, fruity flavors and a smooth finish. Balanced effects provide both mental clarity and physical relaxation.',
     category: 'flower',
     price: 50.0,
-    image: '/images/products/mochi.jpg',
+    image: '/images/products/Mochi.jpg',
     inStock: true,
     featured: true,
     cannabinoids: ['THCA'],
