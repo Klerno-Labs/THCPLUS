@@ -86,11 +86,6 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Description */}
         <p className="text-sm text-gray-600 mb-4 line-clamp-3">{product.description}</p>
-
-        {/* Price */}
-        <div className="border-t border-gray-200 pt-4 mt-4">
-          <p className="text-2xl font-bold text-primary">${product.price.toFixed(2)}</p>
-        </div>
       </CardContent>
     </Card>
   )
