@@ -104,10 +104,9 @@ export function Footer() {
                 </div>
               </li>
             </ul>
-            {/* TODO: Update social media links with actual URLs */}
             <div className="flex space-x-4 mt-4">
               <a
-                href="https://www.instagram.com/3rdcoastsmokecompany/"
+                href="https://www.instagram.com/thcplusnwhouston/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-secondary transition-colors"

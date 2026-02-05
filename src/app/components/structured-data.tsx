@@ -52,12 +52,7 @@ export function LocalBusinessStructuredData() {
       },
       geoRadius: '50000', // 50km radius
     },
-    sameAs: [
-      // Add social media profiles here when available
-      // 'https://www.facebook.com/thcplus',
-      // 'https://www.instagram.com/thcplus',
-      // 'https://twitter.com/thcplus',
-    ],
+    sameAs: ['https://www.instagram.com/thcplusnwhouston/'],
   }
 
   return (

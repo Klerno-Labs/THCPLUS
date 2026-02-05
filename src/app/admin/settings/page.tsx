@@ -173,7 +173,7 @@ export default async function AdminSettingsPage() {
           initialData={
             settings || {
               facebookUrl: null,
-              instagramUrl: null,
+              instagramUrl: 'https://www.instagram.com/thcplusnwhouston/',
               twitterUrl: null,
               linkedinUrl: null,
               youtubeUrl: null,
