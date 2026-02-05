@@ -87,49 +87,9 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Description */}
         <p className="text-sm text-gray-600 mb-4 line-clamp-3">{product.description}</p>
 
-        {/* Product Details */}
-        <div className="space-y-2 mb-4 text-sm text-gray-600">
-          {product.thcContent && (
-            <div className="flex justify-between">
-              <span>THC Content:</span>
-              <span className="font-medium text-gray-900">{product.thcContent}</span>
-            </div>
-          )}
-          {product.cbdContent && (
-            <div className="flex justify-between">
-              <span>CBD Content:</span>
-              <span className="font-medium text-gray-900">{product.cbdContent}</span>
-            </div>
-          )}
-          {product.strainType && (
-            <div className="flex justify-between">
-              <span>Type:</span>
-              <span className="font-medium text-gray-900">{product.strainType}</span>
-            </div>
-          )}
-          {product.size && (
-            <div className="flex justify-between">
-              <span>Size:</span>
-              <span className="font-medium text-gray-900">{product.size}</span>
-            </div>
-          )}
-        </div>
-
-        {/* Brand and Stock Status */}
-        <div className="flex items-center justify-between border-t border-gray-200 pt-4 mt-4">
-          {product.brand && <p className="text-sm font-medium text-gray-700">{product.brand}</p>}
-
-          {/* In Stock Indicator */}
-          <div className="flex items-center gap-2 ml-auto">
-            <div
-              className={`w-2.5 h-2.5 rounded-full ${
-                product.inStock ? 'bg-emerald-500' : 'bg-red-500'
-              }`}
-            />
-            <span className="text-sm font-medium text-gray-600">
-              {product.inStock ? 'In Stock' : 'Out of Stock'}
-            </span>
-          </div>
+        {/* Price */}
+        <div className="border-t border-gray-200 pt-4 mt-4">
+          <p className="text-2xl font-bold text-primary">${product.price.toFixed(2)}</p>
         </div>
       </CardContent>
     </Card>
