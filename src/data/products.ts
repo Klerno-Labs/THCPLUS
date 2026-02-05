@@ -214,6 +214,24 @@ export const products: Product[] = [
     strainType: 'Sativa',
     size: '1g',
   },
+
+  // PRE-ROLLS
+  {
+    id: 'preroll-001',
+    name: 'Premium Pre-Roll',
+    description:
+      'Expertly rolled and ready to enjoy. Featuring our finest THCA flower in a convenient pre-roll format. Perfect for on-the-go relaxation.',
+    category: 'pre-rolls',
+    price: 15.0,
+    image: '/images/products/Pre Roll.jpg',
+    inStock: true,
+    featured: true,
+    cannabinoids: ['THCA'],
+    thcContent: '28% THCA',
+    labTested: true,
+    strainType: 'Hybrid',
+    size: '1g',
+  },
 ]
 
 // Helper functions
