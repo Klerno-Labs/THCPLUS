@@ -15,7 +15,6 @@ export const products: Product[] = [
     description:
       'A potent hybrid strain with a sweet, earthy aroma. Known for its relaxing effects and creamy cookie flavor profile. Perfect for evening relaxation.',
     category: 'flower',
-    price: 45.0,
     image: '/images/products/White Boy Cookies.jpg',
     inStock: true,
     featured: true,
@@ -31,7 +30,6 @@ export const products: Product[] = [
     description:
       'Bright citrus notes meet sweet candy flavors in this sativa-dominant hybrid. Uplifting and energizing effects with a tangy lemon kick.',
     category: 'flower',
-    price: 45.0,
     image: '/images/products/Lenon Zkittles.jpg',
     inStock: true,
     featured: true,
@@ -47,7 +45,6 @@ export const products: Product[] = [
     description:
       'Sweet berry flavors dominate this indica-leaning hybrid. Smooth smoke with relaxing body effects and a fruity berry finish.',
     category: 'flower',
-    price: 45.0,
     image: '/images/products/Hi Berry Chew.jpg',
     inStock: true,
     cannabinoids: ['THCA'],
@@ -62,7 +59,6 @@ export const products: Product[] = [
     description:
       'A premium hybrid with creamy vanilla notes and potent effects. Dense, frosty buds with exceptional bag appeal and powerful relaxation.',
     category: 'flower',
-    price: 50.0,
     image: '/images/products/Mac Flurry.jpg',
     inStock: true,
     featured: true,
@@ -78,7 +74,6 @@ export const products: Product[] = [
     description:
       'The classic Gelato phenotype with sweet dessert flavors and balanced hybrid effects. Smooth, creamy smoke with hints of citrus and berries.',
     category: 'flower',
-    price: 50.0,
     image: '/images/products/Gelato 33.jpg',
     inStock: true,
     featured: true,
@@ -94,7 +89,6 @@ export const products: Product[] = [
     description:
       'Indulgent bakery flavors with sweet dough and glaze notes. This indica-dominant strain delivers deep relaxation and stress relief.',
     category: 'flower',
-    price: 45.0,
     image: '/images/products/Donut Shop.jpg',
     inStock: true,
     cannabinoids: ['THCA'],
@@ -109,7 +103,6 @@ export const products: Product[] = [
     description:
       "Rich, creamy vanilla and sweet dough flavors make this indica a dessert lover's dream. Heavy-hitting relaxation for evening use.",
     category: 'flower',
-    price: 50.0,
     image: '/images/products/Ice Cream Cake.jpg',
     inStock: true,
     featured: true,
@@ -125,7 +118,6 @@ export const products: Product[] = [
     description:
       'Powerful indica with diesel and earthy notes. Known for its strong sedative effects and pungent aroma. Perfect for deep relaxation.',
     category: 'flower',
-    price: 48.0,
     image: '/images/products/Motor Breath.jpg',
     inStock: true,
     cannabinoids: ['THCA'],
@@ -140,7 +132,6 @@ export const products: Product[] = [
     description:
       'Exotic hybrid with sweet, fruity flavors and a smooth finish. Balanced effects provide both mental clarity and physical relaxation.',
     category: 'flower',
-    price: 50.0,
     image: '/images/products/mochi.jpg',
     inStock: true,
     featured: true,
@@ -158,7 +149,6 @@ export const products: Product[] = [
     description:
       'Tropical pineapple flavors with energizing sativa effects. Premium live resin concentrate with full terpene preservation.',
     category: 'concentrates',
-    price: 40.0,
     image: '/images/products/Pineapple Express.jpg',
     inStock: true,
     featured: true,
@@ -174,7 +164,6 @@ export const products: Product[] = [
     description:
       'Miracle Alien Cookies concentrate with complex flavors and potent effects. High-quality extraction with exceptional purity.',
     category: 'concentrates',
-    price: 45.0,
     image: '/images/products/MAC.jpg',
     inStock: true,
     featured: true,
@@ -190,7 +179,6 @@ export const products: Product[] = [
     description:
       'Sweet vanilla cookie flavors in a smooth, potent concentrate. Hybrid effects provide balanced relaxation and euphoria.',
     category: 'concentrates',
-    price: 42.0,
     image: '/images/products/Cookie N Creme.jpg',
     inStock: true,
     cannabinoids: ['THCA'],
@@ -205,7 +193,6 @@ export const products: Product[] = [
     description:
       'Bright citrus and tangerine flavors with uplifting sativa effects. Premium concentrate with intense terpene profile.',
     category: 'concentrates',
-    price: 40.0,
     image: '/images/products/Sour Tanger.jpg',
     inStock: true,
     cannabinoids: ['THCA'],
@@ -222,7 +209,6 @@ export const products: Product[] = [
     description:
       'Expertly rolled and ready to enjoy. Featuring our finest THCA flower in a convenient pre-roll format. Perfect for on-the-go relaxation.',
     category: 'pre-rolls',
-    price: 15.0,
     image: '/images/products/Pre Roll.jpg',
     inStock: true,
     featured: true,

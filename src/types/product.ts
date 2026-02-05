@@ -21,7 +21,7 @@ export interface Product {
   name: string
   description: string
   category: ProductCategory
-  price: number
+  price?: number
   image: string
   inStock: boolean
   featured?: boolean
@@ -38,10 +38,6 @@ export interface Product {
 export interface ProductFilters {
   category?: ProductCategory
   cannabinoid?: CannabinoIDType
-  priceRange?: {
-    min: number
-    max: number
-  }
   inStockOnly?: boolean
   searchQuery?: string
 }
